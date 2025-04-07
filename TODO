@@ -1,0 +1,3 @@
+add gnu gpl license the right way
+see todo in src/grcpp.cpp
+add license header to grcpp.cpp

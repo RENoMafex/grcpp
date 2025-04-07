@@ -1,0 +1,7 @@
+build/
+grcpp
+.vscode/
+
+#the build dir just has build artifacts
+#the executable also doesn't need to go to git
+#the .vscode folder also isn't included for obvious reasons
