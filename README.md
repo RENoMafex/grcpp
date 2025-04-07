@@ -26,7 +26,7 @@ Instructions for building and installing **grcpp** will be added soon.
 ## Usage
 
 Usage examples and documentation will be provided as the project progresses.
-When the project is released, the usage will be the same as grc
+When the project enters beta state, the usage will be the same as grc
 
 ## Acknowledgments
 
