@@ -4,7 +4,7 @@ grcpp (0.0.1(pre-alpha))
   + change license from GPLv2-or-later to GPLv3-or-later
   * added colorization file for tree command
 
-  -- Malte Schilling <schilling.malte@googlemail.com>  Mon, 07 Apr 2025
+  -- Malte Schilling <schilling.malte@googlemail.com>  Mon, 07 Apr 2025 2:20:03 +0200
 
 grc (1.13.1-1) unstable; urgency=low
 
