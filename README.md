@@ -1,8 +1,8 @@
 # grcpp
 
-### **WARNING!** This software is NOT in a working state!
-
 #### This repository is a C++ rewrite of the tool [**grc**](https://github.com/garabik/grc) by Radovan Garabik.
+
+### **WARNING!** This software is NOT in a working state and should not be used. Please only use this code for educational or development purposes!
 
 ## About
 
