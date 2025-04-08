@@ -26,7 +26,6 @@
 
 #pragma region includes
 #include <iostream>
-#include <filesystem>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -59,7 +58,6 @@ bool invalid_color_arg(Grcpp_Options check);
 #pragma region int main()
 int main(int argc, char* argv[]) {
     //initialize needed things
-    namespace fs = std::filesystem;
     Grcpp_Options grcpp_options; //holds options for THIS program
     std::vector<std::string> other = {}; //holds options for the called program
     try { //beautify errors from program_options
