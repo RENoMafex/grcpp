@@ -87,12 +87,8 @@ int main(int argc, char* argv[]) {
                 while (std::getline(file, line)) {
                     if (line.empty()) break;
                     if (line.at(0) == '#' || line.at(0) == '\n') continue;
-                    while (std::isspace(line.front())) {
-                        line = line.substr(1);
-                    }
-                    while (std::isspace(line.back())) {
-                        line.pop_back();
-                    }
+                    while (std::isspace(line.front())) line = line.substr(1);
+                    while (std::isspace(line.back())) line.pop_back();
                 }
             }
         }
