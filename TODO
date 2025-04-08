@@ -1,3 +1,5 @@
-add gnu gpl license the right way
-see todo in src/grcpp.cpp
-add license header to grcpp.cpp
+This file is part of grcpp.
+Licensed under the GNU General Public License v3.0 or later.
+See COPYING file for more details.
+
+TODO:

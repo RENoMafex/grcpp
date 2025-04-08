@@ -29,6 +29,7 @@
 #pragma endregion
 
 #define GRCPP_VERSION "v0.0.1(pre-alpha)"
+#define DLOG(...) std::cout<<__VA_ARGS__<<std::endl;
 
 struct Grcpp_Options { //The options directly used by grcpp
     bool help = false; //does print_help_message() need to be called?
@@ -40,7 +41,7 @@ struct Grcpp_Options { //The options directly used by grcpp
 
 #pragma region function_declarations
 //prints help message
-void print_help_msg(std::string called_name = "grcpp");
+void print_help_msg(std::string_view called_name = "grcpp");
 //fills an 'Grcpp_Options' struct with the parsed arguments
 void init_program_options(int argc, char* argv[], Grcpp_Options &grcpp_options, std::vector<std::string> &other_options);
 //checks if all options are valid.
@@ -49,6 +50,7 @@ bool invalid_args(Grcpp_Options check);
 bool invalid_color_arg(Grcpp_Options check);
 #pragma endregion
 
+#pragma region int main()
 int main(int argc, char* argv[]) {
     //initialize needed things
     namespace fs = std::filesystem;
@@ -92,7 +94,7 @@ int main(int argc, char* argv[]) {
 #pragma region function_definitions
 void print_help_msg(std::string called_name) {
     std::cout <<
-        "Generic Colorizer (C++) " << GRCPP_VERSION << "\n" <<
+        "Generic Colorizer (C++) " << GRCPP_VERSION << " compiled on " << __DATE__ << "\n" << 
         called_name << " [options] command [args]\n" <<
         "Options:\n" <<
         "-h      --help           Show this help.\n" <<
@@ -102,6 +104,9 @@ void print_help_msg(std::string called_name) {
         "-c name --config=name    Use name as configuration file for grcat\n" <<
         "        --color=word     Word is one of: on, off, auto\n" <<
         "        --colour=word    Same as color, for compatibility reasons\n" <<
+		"\n" <<
+		"THIS SOFTWARE IS LICENSED UNDER THE GNU GENERAL PUBLIC LICENSE V3.0!\n" <<
+		"Copyright (c) Malte Schilling 2025" <<
     std::flush;
 }
 
@@ -135,11 +140,14 @@ void init_program_options(int argc, char* argv[], Grcpp_Options &grcpp_options, 
         if (varmap.count("config")) grcpp_options.confname = varmap["config"].as<string>();
         if (varmap.count("color")) grcpp_options.color = varmap["color"].as<string>();
     } catch (const boost::program_options::error &e) {
-        std::cerr<< "\n" << e.what() << "\n" << std::endl;
+        std::cerr << "\n" << e.what() << "\n" << std::endl;
         print_help_msg(argv[0]);
         return;
     } catch (...) {
-
+		std::cerr << "\n" <<
+			"Unknown Error! Please reach out to <schilling.malte@googlemail.com> or create an issue on <https://github.com/RENoMafex/grcpp>." <<
+			"\n" << 
+		std::flush;
     }
 } // void init_program_options()
 
@@ -162,6 +170,4 @@ bool invalid_color_arg(Grcpp_Options check) {
 }
 #pragma endregion
 
-#pragma message "WARNING! This software right now is NOT in a working state (" GRCPP_VERSION ") and should not be used. Please only use this code for educational or development purposes!"
-
-
+#pragma message "WARNING! This software right now is NOT in a working state and should not be used. Please only use this code for educational or development purposes!"
