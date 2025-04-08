@@ -16,7 +16,13 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+
 //TODO:
+// - Implement catch_signal() from grc
+
+//DONE:
+// - Rewrite grc in cpp until line 100
+
 
 #pragma region includes
 #include <iostream>
@@ -67,7 +73,7 @@ int main(int argc, char* argv[]) {
     if (invalid_color_arg(grcpp_options)) {print_help_msg(argv[0]); return 1;}
     if (grcpp_options.help) {print_help_msg(argv[0]); return 0;}
     //from here on we know, that the grcpp_options is properly setup and help isnt needed
-    /*if (grcpp_options.confname.empty()) {
+    if (grcpp_options.confname.empty()) {
         std::string home_location = std::getenv("HOME");
         std::string xdg_conf_location = std::getenv("XDG_CONFIG_HOME");
         if (xdg_conf_location.empty() && !home_location.empty()) {
@@ -81,18 +87,24 @@ int main(int argc, char* argv[]) {
             if (file) {
                 std::string line = {};
                 while (std::getline(file, line)) {
-                    if (line.at(0) == '#' || line.at(0) == '\n') continue; //original code line 98
-
+                    if (line.empty()) break;
+                    if (line.at(0) == '#' || line.at(0) == '\n') continue;
+                    while (std::isspace(line.front())) {
+                        line = line.substr(1);
+                    }
+                    while (std::isspace(line.back())) {
+                        line.pop_back();
+                    }
                 }
             }
         }
-    }*/
+    }
 
     return 0;
 } // int main()
 
 #pragma region function_definitions
-void print_help_msg(std::string called_name) {
+void print_help_msg(std::string_view called_name) {
     std::cout <<
         "Generic Colorizer (C++) " << GRCPP_VERSION << " compiled on " << __DATE__ << "\n" << 
         called_name << " [options] command [args]\n" <<
