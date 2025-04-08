@@ -35,5 +35,7 @@ Special thanks to [Radovan Garabik](https://github.com/garabik) for creating the
 ## Licenses
 
 This project is licensed under the terms of the [GNU General Public License v3.0](http://www.gnu.org/licenses/gpl-3.0.html) or later.
+
 The original **grc** project is licensed unter the [GNU General Public License v2.0](http://www.gnu.org/licenses/gpl-2.0.html) or later.
+
 This project uses the Boost.Program_options library, which is distributed under the [Boost Software License, Version 1.0](https://www.boost.org/LICENSE_1_0.txt).
