@@ -50,7 +50,7 @@ When the project enters beta state, the usage will be the same as grc
 
 ## Acknowledgments
 
-Special thanks to [Radovan Garabik](https://github.com/garabik) for creating the original **grc** tool.
+Special thanks to [Radovan Garabík](https://github.com/garabik) for creating the original **grc** tool.
 
 ## Licenses
 
