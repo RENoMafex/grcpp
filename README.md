@@ -1,8 +1,26 @@
+<!--
+This file is part of grcpp, a C++ rewrite of Radovan Garabiks 'grc'
+Copyright (C) 2025 Malte Schilling schilling.malte@googlemail.com
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
 # grcpp
 
 #### This repository is a C++ rewrite of the tool [**grc**](https://github.com/garabik/grc) by Radovan Garabik.
 
-### **WARNING!** This software is NOT in a working state and should not be used. Please only use this code for educational or development purposes!
+### <span color=red;>**WARNING!** This software is NOT in a working state and should not be used. Please only use this code for educational or development purposes!</span:>
 
 ## About
 
@@ -34,8 +52,6 @@ Special thanks to [Radovan Garabik](https://github.com/garabik) for creating the
 
 ## Licenses
 
-This project is licensed under the terms of the [GNU General Public License v3.0](http://www.gnu.org/licenses/gpl-3.0.html) or later.
-
-The original **grc** project is licensed unter the [GNU General Public License v2.0](http://www.gnu.org/licenses/gpl-2.0.html) or later.
-
-This project uses the Boost.Program_options library, which is distributed under the [Boost Software License, Version 1.0](https://www.boost.org/LICENSE_1_0.txt).
+This project is licensed under the terms of the [GNU General Public License v3.0](http://www.gnu.org/licenses/gpl-3.0.html) or later.</br>
+The original **grc** project is licensed unter the [GNU General Public License v2.0](http://www.gnu.org/licenses/gpl-2.0.html) or later.</br>
+This project uses the **Boost.Program_options** library, which is distributed under the [Boost Software License, Version 1.0](https://www.boost.org/LICENSE_1_0.txt).
