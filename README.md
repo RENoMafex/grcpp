@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #### This repository is a C++ rewrite of the tool [**grc**](https://github.com/garabik/grc) by Radovan Garabik.
 
-### <span color=red;>**WARNING!** This software is NOT in a working state and should not be used. Please only use this code for educational or development purposes!</span:>
+### <text color=red>**WARNING!** This software is NOT in a working state and should not be used. Please only use this code for educational or development purposes!</text>
 
 ## About
 
