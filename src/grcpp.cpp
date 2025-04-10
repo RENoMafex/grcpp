@@ -20,10 +20,11 @@
 //TODO:
 // - Implement catch_signal() from grc
 // - Fix that if the called program takes one of the options,
-//   grcpp also takes, that it gets forwarded right. (is it even like that?)
+//   grcpp also takes, that it gets forwarded right. (is it even an issue?)
+// - Add option -getconfig to display which grc.conf is used
 
 //DONE:
-// - Rewrite grc in cpp until line 100
+// - Rewrite grc in cpp until line 103
 
 
 #pragma region includes
@@ -37,7 +38,7 @@
 #pragma endregion
 
 #define GRCPP_VERSION "v0.0.1(pre-alpha)"
-#define DLOG(...) std::cout<<__VA_ARGS__<<std::endl;
+#define DLOG(x) std::cout<<x<<std::endl;
 
 struct Grcpp_Options { //The options directly used by grcpp
     bool help = false; //does print_help_message() need to be called?
@@ -56,6 +57,8 @@ void init_program_options(int argc, char* argv[], Grcpp_Options &grcpp_options, 
 bool invalid_args(Grcpp_Options check);
 //checks if an invalid option for the '--color' option is set
 bool invalid_color_arg(Grcpp_Options check);
+//strip spaces (front and back only) from a string
+void strip_outer_spaces(std::string& str);
 #pragma endregion
 
 #pragma region int main()
@@ -63,6 +66,7 @@ int main(int argc, char* argv[]) {
     //initialize needed things
     Grcpp_Options grcpp_options; //holds options for THIS program
     std::vector<std::string> other = {}; //holds options for the called program
+    std::string conf_name = {}; //holds name of configfile for grcat
     try { //beautify errors from program_options
         init_program_options(argc, argv, grcpp_options, other);
     }catch (const boost::program_options::error &e) {
@@ -72,8 +76,8 @@ int main(int argc, char* argv[]) {
     }
     
     if (invalid_color_arg(grcpp_options)) {print_help_msg(argv[0]); return 1;}
-    if (grcpp_options.help) {print_help_msg(argv[0]); return 0;}
-    //from here on we know, that the grcpp_options is properly setup and help isnt needed
+    if (grcpp_options.help || other.empty()) {print_help_msg(argv[0]); return 0;}
+    //from here on we know, that the grcpp_options is properly setup, other isnt empty and help isnt needed
     if (grcpp_options.confname.empty()) {
         std::string home_location = std::getenv("HOME");
         std::string xdg_conf_location = std::getenv("XDG_CONFIG_HOME");
@@ -84,18 +88,24 @@ int main(int argc, char* argv[]) {
         if (!xdg_conf_location.empty()) conf_file_names.emplace_back(xdg_conf_location + "/grc/grc.conf");
         if (!home_location.empty()) conf_file_names.emplace_back(home_location + "/.grc/grc.conf");
         for (auto conf_file : conf_file_names) {
-            std::ifstream file(conf_file);
+            std::ifstream file(conf_file); //file should be one of the "grc.conf"s
             if (file) {
                 std::string line = {};
                 while (std::getline(file, line)) {
-                    if (line.empty()) break;
-                    if (line.at(0) == '#' || line.at(0) == '\n') continue;
-                    while (std::isspace(line.front())) line = line.substr(1);
-                    while (std::isspace(line.back())) line.pop_back();
+                    strip_outer_spaces(line);
+                    if (line.empty() || line.at(0) == '#' || line.at(0) == '\n') continue; // comments and empty lines
+                    boost::regex pattern(line);
+                    if (boost::regex_search(other.at(0), pattern, boost::regex_constants::match_perl)) {
+                        std::getline(file, conf_name);
+                        break;
+                    }
                 }
-            }
-        }
-    }
+                break;
+            } // if (file)
+        } // for (auto conf_file : conf_file_names)
+    } // if (grcpp_options.confname.empty())
+
+    //conf_name is now properly set
 
     return 0;
 } // int main()
@@ -176,6 +186,20 @@ bool invalid_color_arg(Grcpp_Options check) {
     cout << "\ninvalid argument for option '--color'\n" << endl;
 
     return true;
+}
+
+void strip_outer_spaces(std::string& str) {
+    size_t start = 0;
+    while (start < str.size() && std::isspace(str[start])) {
+        ++start;
+    }
+
+    size_t end = str.size();
+    while (end > start && std::isspace(str[end - 1])) {
+        --end;
+    }
+
+    str = str.substr(start, end - start);
 }
 #pragma endregion
 
