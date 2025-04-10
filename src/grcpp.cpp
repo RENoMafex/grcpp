@@ -23,6 +23,7 @@
 // - Fix that if the called program takes one of the options,
 //   grcpp also takes, that it gets forwarded right. (is it even an issue?)
 // - Add option -getconfig to display which grc.conf is used
+// - See TODO in line 80
 
 //DONE:
 // - Rewrite grc in cpp until line 103
@@ -69,14 +70,18 @@ int main(int argc, char* argv[]) {
     std::vector<std::string> other = {}; //holds options for the called program
     try { //beautify errors from program_options
         init_program_options(argc, argv, grcpp_options, other);
-    }catch (const boost::program_options::error &e) {
-        std::cout << "\n" << e.what() << "\n" << std::endl;
+    }catch (const boost::program_options::error &error) {
+        std::cout << "\n" << error.what() << "\n" << std::endl;
         print_help_msg(argv[0]);
         return 1;
     }
     
     if (invalid_color_arg(grcpp_options)) {print_help_msg(argv[0]); return 1;}
     if (grcpp_options.help || other.empty()) {print_help_msg(argv[0]); return 0;}
+    //TODO: Rewrite the next 3 lines.
+    if (!grcpp_options.err) {grcpp_options.out = true;} //lines 67 - 73
+    if (grcpp_options.err && !grcpp_options.out) {grcpp_options.err = true; grcpp_options.out = false;} //lines 67 - 73
+    if (grcpp_options.err && grcpp_options.out) {grcpp_options.err = true; grcpp_options.out = true;} //lines 67 - 73
     //from here on we know, that the grcpp_options is properly setup, other isnt empty and help isnt needed
     if (grcpp_options.confname.empty()) {
         std::string home_location = std::getenv("HOME");
@@ -104,6 +109,10 @@ int main(int argc, char* argv[]) {
             } // if (file)
         } // for (auto conf_file : conf_file_names)
     } // if (grcpp_options.confname.empty())
+
+    if (grcpp_options.confname != "" && grcpp_options.color == "on") {
+
+    }
 
     DLOG("config_file_name: " << grcpp_options.confname);
     return 0;
