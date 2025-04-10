@@ -19,6 +19,7 @@
 
 //TODO:
 // - Implement catch_signal() from grc
+// - Implement line 106 (needs catch_signal() )
 // - Fix that if the called program takes one of the options,
 //   grcpp also takes, that it gets forwarded right. (is it even an issue?)
 // - Add option -getconfig to display which grc.conf is used
@@ -66,7 +67,6 @@ int main(int argc, char* argv[]) {
     //initialize needed things
     Grcpp_Options grcpp_options; //holds options for THIS program
     std::vector<std::string> other = {}; //holds options for the called program
-    std::string conf_name = {}; //holds name of configfile for grcat
     try { //beautify errors from program_options
         init_program_options(argc, argv, grcpp_options, other);
     }catch (const boost::program_options::error &e) {
@@ -96,19 +96,16 @@ int main(int argc, char* argv[]) {
                     if (line.empty() || line.at(0) == '#' || line.at(0) == '\n') continue; // comments and empty lines
                     boost::regex pattern(line);
                     if (boost::regex_search(other.at(0), pattern, boost::regex_constants::match_perl)) {
-                        std::getline(file, conf_name);
+                        std::getline(file, grcpp_options.confname);
                         break;
-                    }
+                    } // add some message, if confname is not found
                 }
                 break;
             } // if (file)
         } // for (auto conf_file : conf_file_names)
     } // if (grcpp_options.confname.empty())
 
-    //conf_name is now properly set
-
-
-    DLOG("config_file_name: " << conf_name);
+    DLOG("config_file_name: " << grcpp_options.confname);
     return 0;
 } // int main()
 
