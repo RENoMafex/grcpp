@@ -20,9 +20,11 @@ CFLAGS = -std=c++17 $(CWARNINGS)
 LDFLAGS = -lboost_program_options -lboost_regex
 RUNFLAGS =
 
-.PHONY: all clean cleanall run
+.PHONY: all build clean cleanall run
 
 all: run
+
+build:grcpp
 
 run: grcpp
 	./grcpp $(RUNFLAGS)
