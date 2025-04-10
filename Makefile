@@ -33,7 +33,4 @@ grcpp: src/grcpp.cpp
 	$(CC) $(CFLAGS) src/grcpp.cpp -o grcpp $(LDFLAGS)
 
 clean:
-	rm -fv build
-
-cleanall: clean
 	rm -fv grcpp
