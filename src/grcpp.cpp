@@ -26,7 +26,7 @@
 // - See TODO in line 80
 
 //DONE:
-// - Rewrite grc in cpp until line 103
+// - Rewrite grc in cpp until line 115
 
 
 #pragma region includes
@@ -34,6 +34,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <array>
 #include <boost/regex.hpp>
 #include <boost/program_options.hpp>
 //#include <cstdint> //maybe uncomment, if uintX_t, intX_t or something similar gets used
@@ -75,7 +76,7 @@ int main(int argc, char* argv[]) {
         print_help_msg(argv[0]);
         return 1;
     }
-    
+
     if (invalid_color_arg(grcpp_options)) {print_help_msg(argv[0]); return 1;}
     if (grcpp_options.help || other.empty()) {print_help_msg(argv[0]); return 0;}
     //TODO: Rewrite the next 3 lines.
@@ -115,11 +116,24 @@ int main(int argc, char* argv[]) {
         } // for (auto conf_file : conf_file_names)
     } // if (grcpp_options.confname.empty())
 
+//the following code is subject to test, if it works, like it should!
+    std::array<int,2> outfd = {};
+    std::array<int,2> errfd = {};
     if (grcpp_options.confname != "" && grcpp_options.color == "on") {
-
+        if (grcpp_options.out) {
+            if (pipe(outfd.data()) == -1) {
+                std::cout << "Error! Pipe for stdout could not be created!" << std::endl;
+                return 1;
+            }
+        }
+        if (grcpp_options.err) {
+            if (pipe(errfd.data()) == -1) {
+                std::cout << "Error! Pipe for stderr could not be created!" << std::endl;
+                return 1;
+            }
+        }
     }
 
-    DLOG("config_file_name: " << grcpp_options.confname);
     return 0;
 } // int main()
 
