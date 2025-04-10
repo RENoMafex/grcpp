@@ -103,7 +103,12 @@ int main(int argc, char* argv[]) {
                     if (boost::regex_search(other.at(0), pattern, boost::regex_constants::match_perl)) {
                         std::getline(file, grcpp_options.confname);
                         break;
-                    } // add some message, if confname is not found
+                    }
+                }
+                if (grcpp_options.confname == "") {
+                    std::cout << "Configfile for command \"" << other.at(0) << "\" not found!\n" << std::endl;
+                    print_help_msg(argv[0]);
+                    return 1;
                 }
                 break;
             } // if (file)
