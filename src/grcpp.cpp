@@ -113,6 +113,7 @@ int main(int argc, char* argv[]) {
 } // int main()
 
 #pragma region function_definitions
+
 void print_help_msg(std::string_view called_name) {
     std::cout <<
         "Generic Colorizer (C++) " << GRCPP_VERSION << " compiled on " << __DATE__ << "\n" << 
@@ -160,8 +161,8 @@ void init_program_options(int argc, char* argv[], Grcpp_Options &grcpp_options, 
         if (varmap.count("stdout")) grcpp_options.out = true;
         if (varmap.count("config")) grcpp_options.confname = varmap["config"].as<string>();
         if (varmap.count("color")) grcpp_options.color = varmap["color"].as<string>();
-    } catch (const boost::program_options::error &e) {
-        std::cerr << "\n" << e.what() << "\n" << std::endl;
+    } catch (const boost::program_options::error &error) {
+        std::cerr << "\n" << error.what() << "\n" << std::endl;
         print_help_msg(argv[0]);
         return;
     } catch (...) {
@@ -203,6 +204,7 @@ void strip_outer_spaces(std::string& str) {
 
     str = str.substr(start, end - start);
 }
+
 #pragma endregion
 
 #pragma message "WARNING! This software right now is NOT in a working state and should not be used. Please only use this code for educational or development purposes!"
