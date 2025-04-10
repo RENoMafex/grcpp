@@ -107,6 +107,8 @@ int main(int argc, char* argv[]) {
 
     //conf_name is now properly set
 
+
+    DLOG("config_file_name: " << conf_name);
     return 0;
 } // int main()
 
