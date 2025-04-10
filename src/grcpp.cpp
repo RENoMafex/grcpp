@@ -19,6 +19,8 @@
 
 //TODO:
 // - Implement catch_signal() from grc
+// - Fix that if the called program takes one of the options,
+//   grcpp also takes, that it gets forwarded right. (is it even like that?)
 
 //DONE:
 // - Rewrite grc in cpp until line 100
@@ -29,6 +31,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <boost/regex.hpp>
 #include <boost/program_options.hpp>
 //#include <cstdint> //maybe uncomment, if uintX_t, intX_t or something similar gets used
 #pragma endregion

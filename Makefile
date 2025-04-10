@@ -17,7 +17,7 @@
 CC = g++
 CWARNINGS = -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2
 CFLAGS = -std=c++17 $(CWARNINGS)
-LDFLAGS = -lboost_program_options
+LDFLAGS = -lboost_program_options -lboost_regex
 RUNFLAGS =
 
 .PHONY: all clean cleanall run
