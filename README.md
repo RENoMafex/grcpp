@@ -30,7 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ## How to contribute
 
 - If you find any issue with the code, please just open an issue through GitHub. If you don't have a GitHub Account (and don't want to create one), just send an email to [schilling.malte@googlemail.com](mailto:schilling.malte@googlemail.com).
-- If you want to contribute code to this repo, just open a Pull Request through GitHub, 
+- If you want to contribute code to this repo, just open a Pull Request through GitHub.
 >[!NOTE]
 >Proper instructions for contributing to grcpp will be added later.
 
@@ -41,9 +41,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## Installation
 
+A Makefile is included.
 >[!NOTE]
 >Proper instructions for building and installing **grcpp** will be added soon.
-A Makefile is included.
 
 ## Usage
 
