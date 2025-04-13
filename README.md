@@ -41,7 +41,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## Installation
 
-Instructions for building and installing **grcpp** will be added soon.
+>[!NOTE]
+>Proper instructions for building and installing **grcpp** will be added soon.
+A Makefile is included.
 
 ## Usage
 
