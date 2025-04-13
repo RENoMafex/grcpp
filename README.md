@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## About
 
-[**grc** (Generic Colouriser)](https://github.com/garabik/grc) is a tool for adding color to command-line output. This project, **grcpp**, aims to provide a modern, efficient, and extensible implementation, while still being able to be a dropin replacement of the original tool using C++.
+[**grc** (Generic Colouriser)](https://github.com/garabik/grc) is a tool for adding color to command-line output. This project, **grcpp**, aims to provide a modern, efficient, and extensible implementation, while still being able to be a drop-in replacement of the original tool using C++.
 
 ## How to contribute
 
@@ -36,19 +36,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## Features
 
-- Drop in replacement for **grc**.
+- Drop-in replacement for **grc**.
 - Improved performance and maintainability with modern C++.
 
 ## Installation
 
 A Makefile is included.
 >[!NOTE]
->Proper instructions for building and installing **grcpp** will be added soon.
+>Proper instructions for building and installing grcpp will be added soon.
 
 ## Usage
 
 Usage examples and documentation will be provided as the project progresses.
-When the project enters beta state, the usage will be the same as grc
+When the project enters beta state, the usage will be the same as grc.
 
 ## Acknowledgments
 
@@ -58,4 +58,4 @@ Special thanks to [Radovan Garabík](https://github.com/garabik) for creating th
 
 This project is licensed under the terms of the [GNU General Public License v3.0](http://www.gnu.org/licenses/gpl-3.0.html) or later.</br>
 The original **grc** project is licensed unter the [GNU General Public License v2.0](http://www.gnu.org/licenses/gpl-2.0.html) or later.</br>
-This project uses the Boost.Program_options and the Boost.Regex librarys, which are distributed under the [Boost Software License, Version 1.0](https://www.boost.org/LICENSE_1_0.txt).
+This project uses some of the Boost librarys, which are distributed under the [Boost Software License, Version 1.0](https://www.boost.org/LICENSE_1_0.txt).
