@@ -37,6 +37,7 @@
 #include <array>
 #include <boost/regex.hpp>
 #include <boost/program_options.hpp>
+#include <boost/process.hpp>
 //#include <cstdint> //maybe uncomment, if uintX_t, intX_t or something similar gets used
 #pragma endregion
 
@@ -66,6 +67,7 @@ void strip_outer_spaces(std::string& str);
 
 #pragma region int main()
 int main(int argc, char* argv[]) {
+    namespace bp = boost::process;
     //initialize needed things
     Grcpp_Options grcpp_options; //holds options for THIS program
     std::vector<std::string> other = {}; //holds options for the called program
@@ -106,7 +108,7 @@ int main(int argc, char* argv[]) {
                         break;
                     }
                 }
-                if (grcpp_options.confname == "") {
+                if (grcpp_options.confname.empty()) {
                     std::cout << "Configfile for command \"" << other.at(0) << "\" not found!\n" << std::endl;
                     print_help_msg(argv[0]);
                     return 1;
@@ -117,20 +119,9 @@ int main(int argc, char* argv[]) {
     } // if (grcpp_options.confname.empty())
 
 //the following code is subject to test, if it works, like it should!
-    std::array<int,2> outfd = {};
-    std::array<int,2> errfd = {};
-    if (grcpp_options.confname != "" && grcpp_options.color == "on") {
+    if (!grcpp_options.confname.empty() && grcpp_options.color == "on") {
         if (grcpp_options.out) {
-            if (pipe(outfd.data()) == -1) {
-                std::cout << "Error! Pipe for stdout could not be created!" << std::endl;
-                return 1;
-            }
-        }
-        if (grcpp_options.err) {
-            if (pipe(errfd.data()) == -1) {
-                std::cout << "Error! Pipe for stderr could not be created!" << std::endl;
-                return 1;
-            }
+
         }
     }
 
