@@ -34,7 +34,6 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <array>
 #include <boost/regex.hpp>
 #include <boost/program_options.hpp>
 #include <boost/process.hpp>
@@ -48,6 +47,7 @@ struct Grcpp_Options { //The options directly used by grcpp
     bool help = false; //does print_help_message() need to be called?
     bool err = false; //redirect stderr
     bool out = false; //redirect stdout
+//  bool pty = false; //use pseutdoterminal
     std::string confname = {}; //configfile name for grcat
     std::string color = "auto"; //colorization of output (auto, on, off)
 };
@@ -73,7 +73,7 @@ int main(int argc, char* argv[]) {
     std::vector<std::string> other = {}; //holds options for the called program
     try { //beautify errors from program_options
         init_program_options(argc, argv, grcpp_options, other);
-    }catch (const boost::program_options::error &error) {
+    } catch (const boost::program_options::error &error) {
         std::cout << "\n" << error.what() << "\n" << std::endl;
         print_help_msg(argv[0]);
         return 1;
@@ -118,11 +118,19 @@ int main(int argc, char* argv[]) {
         } // for (auto conf_file : conf_file_names)
     } // if (grcpp_options.confname.empty())
 
-//the following code is subject to test, if it works, like it should!
-    if (!grcpp_options.confname.empty() && grcpp_options.color == "on") {
-        if (grcpp_options.out) {
+    if (!grcpp_options.confname.empty() && grcpp_options.color == "on") { //TODO: check if evaluation is really needed.
+        bp::opstream in_stream;  //stdin of child
+        bp::ipstream out_stream; //stdout of child
+        bp::ipstream err_stream; //stderr of child
 
-        }
+        bp::child childproc(other.at(0),
+            bp::std_in < in_stream,
+            bp::std_out > out_stream,
+            bp::std_err > err_stream);
+
+
+    } else {
+        //TODO: just become the program to run
     }
 
     return 0;
@@ -142,9 +150,9 @@ void print_help_msg(std::string_view called_name) {
         "-c name --config=name    Use name as configuration file for grcat\n" <<
         "        --color=word     Word is one of: on, off, auto\n" <<
         "        --colour=word    Same as color, for compatibility reasons\n" <<
-		"\n" <<
-		"THIS SOFTWARE IS LICENSED UNDER THE GNU GENERAL PUBLIC LICENSE V3.0!\n" <<
-		"Copyright (c) Malte Schilling 2025" <<
+        "\n" <<
+        "THIS SOFTWARE IS LICENSED UNDER THE GNU GENERAL PUBLIC LICENSE V3.0!\n" <<
+        "Copyright (c) Malte Schilling 2025" <<
     std::flush;
 }
 
@@ -182,10 +190,10 @@ void init_program_options(int argc, char* argv[], Grcpp_Options &grcpp_options, 
         print_help_msg(argv[0]);
         return;
     } catch (...) {
-		std::cerr << "\n" <<
-			"Unknown Error! Please reach out to <schilling.malte@googlemail.com> or create an issue on <https://github.com/RENoMafex/grcpp>." <<
-			"\n" << 
-		std::flush;
+        std::cerr << "\n" <<
+            "Unknown Error! Please create an issue on <https://github.com/RENoMafex/grcpp> or reach out to <schilling.malte@googlemail.com>." <<
+            "\n" <<
+        std::flush;
     }
 } // void init_program_options()
 
