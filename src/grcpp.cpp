@@ -123,10 +123,10 @@ int main(int argc, char* argv[]) {
         bp::ipstream out_stream; //stdout of child
         bp::ipstream err_stream; //stderr of child
 
-        bp::child childproc(other.at(0),
-            bp::std_in < in_stream,
-            bp::std_out > out_stream,
-            bp::std_err > err_stream);
+        bp::child childproc(other.at(0), // run the program, which output should be colorised
+                            bp::std_in < in_stream,
+                            bp::std_out > out_stream,
+                            bp::std_err > err_stream);
 
 
     } else {
