@@ -49,6 +49,9 @@ A Makefile is included.
 
 Usage examples and documentation will be provided as the project progresses.
 When the project enters beta state, the usage will be the same as grc.
+
+### Visual representation of how grcpp works
+
 ![flowchart of how grcpp works](.github/images/flowchart.svg)
 ## Acknowledgments
 
