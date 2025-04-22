@@ -1,6 +1,7 @@
 build/
 grcpp
 .vscode/
+.github/images/.$flowchart.drawio.bkp
 
 #the build dir just has build artifacts
 #the executable also doesn't need to go to git
