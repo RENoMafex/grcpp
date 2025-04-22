@@ -49,7 +49,7 @@ A Makefile is included.
 
 Usage examples and documentation will be provided as the project progresses.
 When the project enters beta state, the usage will be the same as grc.
-
+![.github/images/flowchart.svg](flowchart of how grcpp works)
 ## Acknowledgments
 
 Special thanks to [Radovan Garabík](https://github.com/garabik) for creating the original **grc** tool.
