@@ -27,6 +27,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 [**grc** (Generic Colouriser)](https://github.com/garabik/grc) is a tool for adding color to command-line output. This project, **grcpp**, aims to provide a modern, efficient, and extensible implementation, while still being able to be a drop-in replacement of the original tool using C++.
 
+## Changes
+
+Grcpp aims to be faster than the original grc, that is why i decided to go for a single binary (opposed to grc wich uses another program called grcat to colorize the output) and utilize multithreading.
+
 ## How to contribute
 
 - If you find any issue with the code, please just open an issue through GitHub. If you don't have a GitHub Account (and don't want to create one), just send an email to [schilling.malte@googlemail.com](mailto:schilling.malte@googlemail.com).

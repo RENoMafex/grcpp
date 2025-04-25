@@ -119,16 +119,14 @@ int main(int argc, char* argv[]) {
     } // if (grcpp_options.confname.empty())
 
     if (!grcpp_options.confname.empty() && grcpp_options.color == "on") { //TODO: check if evaluation is really needed.
-        bp::opstream in_stream;  //stdin of child
-        bp::ipstream out_stream; //stdout of child
-        bp::ipstream err_stream; //stderr of child
+        bp::opstream in_stream;  //stdin to child
+        bp::ipstream out_stream; //stdout from child
+        bp::ipstream err_stream; //stderr from child
 
         bp::child childproc(other.at(0), // run the program, which output should be colorised
                             bp::std_in < in_stream,
                             bp::std_out > out_stream,
                             bp::std_err > err_stream);
-
-
     } else {
         //TODO: just become the program to run
     }
