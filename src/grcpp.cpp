@@ -34,6 +34,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <thread>
 #include <boost/regex.hpp>
 #include <boost/program_options.hpp>
 #include <boost/process.hpp>
@@ -42,6 +43,8 @@
 
 #define GRCPP_VERSION "v0.0.1(pre-alpha)"
 #define DLOG(x) std::cout<<x<<std::endl;
+
+namespace bp = boost::process;
 
 struct Grcpp_Options { //The options directly used by grcpp
     bool help = false; //does print_help_message() need to be called?
@@ -63,11 +66,12 @@ bool invalid_args(Grcpp_Options check);
 bool invalid_color_arg(Grcpp_Options check);
 //strip spaces (front and back only) from a string
 void strip_outer_spaces(std::string& str);
+//reads from a stream
+void read_stream(bp::ipstream& stream, std::ostream& out);
 #pragma endregion
 
 #pragma region int main()
 int main(int argc, char* argv[]) {
-    namespace bp = boost::process;
     //initialize needed things
     Grcpp_Options grcpp_options; //holds options for THIS program
     std::vector<std::string> other = {}; //holds options for the called program
@@ -76,10 +80,10 @@ int main(int argc, char* argv[]) {
     } catch (const boost::program_options::error &error) {
         std::cout << "\n" << error.what() << "\n" << std::endl;
         print_help_msg(argv[0]);
-        return 1;
+        return -1;
     }
 
-    if (invalid_color_arg(grcpp_options)) {print_help_msg(argv[0]); return 1;}
+    if (invalid_color_arg(grcpp_options)) {print_help_msg(argv[0]); return -1;}
     if (grcpp_options.help || other.empty()) {print_help_msg(argv[0]); return 0;}
     //TODO: Rewrite the next 3 lines.
     if (!grcpp_options.err) {grcpp_options.out = true;} //lines 67 - 73
@@ -111,7 +115,7 @@ int main(int argc, char* argv[]) {
                 if (grcpp_options.confname.empty()) {
                     std::cout << "Configfile for command \"" << other.at(0) << "\" not found!\n" << std::endl;
                     print_help_msg(argv[0]);
-                    return 1;
+                    return -1;
                 }
                 break;
             } // if (file)
@@ -119,14 +123,23 @@ int main(int argc, char* argv[]) {
     } // if (grcpp_options.confname.empty())
 
     if (!grcpp_options.confname.empty() && grcpp_options.color == "on") { //TODO: check if evaluation is really needed.
-        bp::opstream in_stream;  //stdin to child
-        bp::ipstream out_stream; //stdout from child
-        bp::ipstream err_stream; //stderr from child
+        bp::ipstream out_stream;
+        bp::ipstream err_stream;
 
-        bp::child childproc(other.at(0), // run the program, which output should be colorised
-                            bp::std_in < in_stream,
-                            bp::std_out > out_stream,
-                            bp::std_err > err_stream);
+        const auto executable = other.at(0);
+        std::vector<std::string> exe_args(other.begin() + 1, other.end());
+
+        bp::child child_process(bp::exe = executable, bp::args = exe_args, bp::std_out > out_stream, bp::std_err > err_stream);
+
+        std::thread out_thread(read_stream, std::ref(out_stream), std::ref(std::cout));
+        std::thread err_thread(read_stream, std::ref(err_stream), std::ref(std::cerr));
+
+        out_thread.join();
+        err_thread.join();
+
+        child_process.wait();
+
+        return child_process.exit_code();
     } else {
         //TODO: just become the program to run
     }
@@ -225,6 +238,14 @@ void strip_outer_spaces(std::string& str) {
     }
 
     str = str.substr(start, end - start);
+}
+
+void read_stream(bp::ipstream& stream, std::ostream& out) {
+    std::string line;
+    while (std::getline(stream, line)) {
+        //TODO: Make the lines accessible.
+        out << line << "\n";
+    }
 }
 
 #pragma endregion
