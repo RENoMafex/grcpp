@@ -29,7 +29,7 @@ build:grcpp
 run: grcpp
 	./grcpp $(RUNFLAGS)
 
-grcpp: src/grcpp.cpp
+grcpp: src/grcpp.cpp src/colors.hpp
 	$(CC) $(CFLAGS) src/grcpp.cpp -o grcpp $(LDFLAGS)
 
 clean:
