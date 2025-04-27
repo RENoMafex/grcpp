@@ -23,10 +23,11 @@
 // - Fix that if the called program takes one of the options,
 //   grcpp also takes, that it gets forwarded right. (is it even an issue?)
 // - Add option -getconfig to display which grc.conf is used
-// - See TODO in line 80
+// - See TODO in line 90
+// - Implement grcat (inside colorize() function)
 
 //DONE:
-// - Rewrite grc in cpp until line 115
+// - Rewrite grc
 
 
 

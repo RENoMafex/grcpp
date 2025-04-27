@@ -1,3 +1,6 @@
+#ifndef COLORS_HPP
+#define COLORS_HPP
+
 #include <array>
 #include <string_view>
 #include <utility> // std::pair
@@ -73,3 +76,5 @@ constexpr std::array<std::pair<std::string_view, std::string_view>, 46> color_ma
     {"on_bright_cyan",      "\033[46;106m"},
     {"on_bright_white",     "\033[47;107m"}
 }};
+
+#endif
