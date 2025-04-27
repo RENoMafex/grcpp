@@ -67,7 +67,7 @@ void init_program_options(int argc, char* argv[], Grcpp_Options &grcpp_options, 
 bool invalid_color_arg(Grcpp_Options& check);
 //strip spaces (front and back only) from a string
 void strip_outer_spaces(std::string& str);
-//reads from a stream
+//colorize given stream
 void colorize(bp::ipstream& stream, std::ostream& out);
 #pragma endregion
 
@@ -123,23 +123,27 @@ int main(int argc, char* argv[]) {
         } // for (auto conf_file : conf_file_names)
     } // if (grcpp_options.confname.empty())
 
-    const auto executable = other.at(0);
+    const auto executable = bp::search_path(other.at(0));
     const std::vector<std::string> exe_args(other.begin() + 1, other.end());
 
     bp::ipstream out_stream;
     bp::ipstream err_stream;
 
     if (!grcpp_options.confname.empty() && grcpp_options.color == "on") { //TODO: check if evaluation is really needed.
-
-        other.at(0) = bp::search_path(other.at(0)).string();
-
         bp::child child_process(bp::exe = executable, bp::args = exe_args, bp::std_out > out_stream, bp::std_err > err_stream);
 
-        std::thread out_thread(colorize, std::ref(out_stream), std::ref(std::cout));
-        std::thread err_thread(colorize, std::ref(err_stream), std::ref(std::cerr));
+        std::vector<std::thread> colorize_threads;
 
-        out_thread.join();
-        err_thread.join();
+        if (grcpp_options.out) {
+            colorize_threads.emplace_back(colorize, std::ref(out_stream), std::ref(std::cout));
+        }
+        if (grcpp_options.err) {
+            colorize_threads.emplace_back(colorize, std::ref(err_stream), std::ref(std::cerr));
+        }
+
+        for (auto& t : colorize_threads) {
+            t.join();
+        }
 
         child_process.wait();
 
