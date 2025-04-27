@@ -41,6 +41,7 @@
 #include <boost/regex.hpp>
 #include <boost/program_options.hpp>
 #include <boost/process.hpp>
+#include "colors.hpp"
 // #include <cstdint> //maybe uncomment, if uintX_t, intX_t or something similar gets used
 #pragma endregion
 
