@@ -2,7 +2,7 @@
 CXX ?= g++
 CXXFLAGS = $(WARNINGS) -std=c++17 -O0
 WARNINGS = -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2
-LDFLAGS = -lboost_program_options -lboost_regex -lstdc++
+LDFLAGS = -lboost_program_options -lboost_regex
 
 # Directories
 SRC_DIR = src
@@ -37,12 +37,12 @@ $(BUILD_DIR):
 # Run-Target
 run:
 	@if [ ! -f $(TARGET) ]; then $(MAKE) $(TARGET); fi
-	./$(TARGET)
+	@./$(TARGET)
 
 # Clean Object files
 clean:
-	rm -rfv $(BUILD_DIR)
+	@rm -rfv $(BUILD_DIR)
 
 # Clean out file and objects
 cleanall: clean
-	rm -rfv $(TARGET)
+	@rm -rfv $(TARGET)
