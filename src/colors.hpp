@@ -71,7 +71,7 @@ constexpr std::array<std::pair<std::string_view, std::string_view>, 46> color_ma
     {"on_bright_white",     "\033[47;107m"}
 }};
 
-const std::string_view to_escape(std::string_view color) {
+inline const std::string_view to_escape(std::string_view color) {
     for (const auto& pair : color_map) {
         if (pair.first == color) {
             return pair.second;

@@ -43,6 +43,7 @@
 #include <boost/program_options.hpp>
 #include <boost/process.hpp>
 #include "colors.hpp"
+#include "colorize.hpp"
 // #include <cstdint> //maybe uncomment, if uintX_t, intX_t or something similar gets used
 #pragma endregion
 
@@ -69,8 +70,6 @@ void init_program_options(int argc, char* argv[], Grcpp_Options &grcpp_options, 
 bool invalid_color_arg(Grcpp_Options& check);
 //strip spaces (front and back only) from a string
 void strip_outer_spaces(std::string& str);
-//colorize given stream
-void colorize(bp::ipstream& stream, std::ostream& out/* , typename config */);
 #pragma endregion
 
 #pragma region int main()
@@ -248,14 +247,6 @@ void strip_outer_spaces(std::string& str) {
     }
 
     str = str.substr(start, end - start);
-}
-
-void colorize(bp::ipstream& stream, std::ostream& out/* , typename config */) {
-    std::string line;
-    while (std::getline(stream, line)) {
-        //TODO: Make the lines accessible.
-        out << line << "\n";
-    }
 }
 
 #pragma endregion
