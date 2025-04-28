@@ -1,36 +1,48 @@
-# This file is part of grcpp, a C++ rewrite of Radovan Garabiks 'grc'
-# Copyright (C) 2025 Malte Schilling schilling.malte@googlemail.com
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-CC = g++
-CWARNINGS = -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2
-CFLAGS = -std=c++17 -O0 $(CWARNINGS)
+# Compiler and Flags
+CXX ?= g++
+CXXFLAGS = $(WARNINGS) -std=c++17 -O0
+WARNINGS = -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2
 LDFLAGS = -lboost_program_options -lboost_regex
-RUNFLAGS =
 
-.PHONY: all build clean run
+# Directories
+SRC_DIR = src
+BUILD_DIR = build
 
+# Define pseudotargets
+.PHONY: all run clean cleanall
+
+# Source, Header and Object files
+SRCS = $(wildcard $(SRC_DIR)/*.cpp)
+HDRS = $(wildcard $(SRC_DIR)/*.hpp) $(wildcard $(SRC_DIR)/*.cpp)
+OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRCS))
+
+# Output
+TARGET = grcpp
+
+# Defaulttarget
 all: run
 
-build:grcpp
+# Compile
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(HDRS) | $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-run: grcpp
-	./grcpp $(RUNFLAGS)
+# Link
+$(TARGET): $(OBJS)
+	$(CXX) $^ -o $@ $(LDFLAGS)
 
-grcpp: src/grcpp.cpp src/colors.hpp
-	$(CC) $(CFLAGS) src/grcpp.cpp -o grcpp $(LDFLAGS)
+# Make the build directory if needed
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
 
+# Run-Target
+run:
+	@if [ ! -f $(TARGET) ]; then $(MAKE) $(TARGET); fi
+	./$(TARGET)
+
+# Clean Object files
 clean:
-	@rm -fv grcpp
+	rm -rfv $(BUILD_DIR)
+
+# Clean out file and objects
+cleanall: clean
+	rm -rfv $(TARGET)
