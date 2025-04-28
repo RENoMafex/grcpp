@@ -13,14 +13,14 @@ BUILD_DIR = build
 
 # Source, Header and Object files
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
-HDRS = $(wildcard $(SRC_DIR)/*.hpp) $(wildcard $(SRC_DIR)/*.cpp)
+HDRS = $(wildcard $(SRC_DIR)/*.hpp)
 OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRCS))
 
 # Output
 TARGET = grcpp
 
 # Defaulttarget
-all: run
+all: $(TARGET)
 
 # Compile
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(HDRS) | $(BUILD_DIR)
