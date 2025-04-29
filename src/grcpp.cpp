@@ -93,6 +93,7 @@ int main(int argc, char* argv[]) {
     if (grcpp_options.err && grcpp_options.out) {grcpp_options.err = true; grcpp_options.out = true;} //lines 67 - 73
     //from here on we know, that the grcpp_options is properly setup, other isnt empty and help isnt needed
     if (grcpp_options.confname.empty()) {
+        //TODO: Make this not os dependant.
         std::string home_location = std::getenv("HOME");
         std::string xdg_conf_location = std::getenv("XDG_CONFIG_HOME");
         if (xdg_conf_location.empty() && !home_location.empty()) {
