@@ -230,7 +230,7 @@ bool invalid_color_arg(Grcpp_Options& check) {
     if (check.color == "on") return false;
     if (check.color == "off") return false;
 
-    cout << "\ninvalid argument for option '--color'\n" << endl;
+    cout << "\nERROR: invalid argument for option '--color'\n" << endl;
 
     return true;
 }
