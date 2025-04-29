@@ -2,6 +2,7 @@
 #define COLORIZE_HPP
 
 #include <string>
+#include <vector>
 #include <iostream>
 #include <fstream>
 #include <boost/regex.hpp>
