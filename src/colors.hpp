@@ -47,7 +47,7 @@ constexpr std::array<std::pair<std::string_view, std::string_view>, 46> color_ma
 // non-standard attributes, supported by some terminals
     {"dark",                "\033[2m"},
     {"italic",              "\033[3m"},
-    {"rapidblink",           "\033[6m"},
+    {"rapidblink",          "\033[6m"},
     {"strikethrough",       "\033[9m"},
 
 // aixterm bright color codes
