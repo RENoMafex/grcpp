@@ -35,6 +35,7 @@
 
 #pragma region includes
 #include <iostream>
+#include <filesystem>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -116,9 +117,8 @@ int main(int argc, char* argv[]) {
                     }
                 }
                 if (grcpp_options.confname.empty()) {
-                    std::cout << "ERROR: Configfile for command \"" << other.at(0) << "\" not found!\n" << std::endl;
-                    print_help_msg(argv[0]);
-                    return -1;
+                    std::cout << argv[0] << ((grcpp_options.color == "on") ? " \033[31m\033[1mERROR:\033[0m" : " ERROR:") <<
+                    " Configfile for command \"" << other.at(0) << "\" could not be determined!\n" << std::endl;
                 }
                 break;
             } // if (file)
@@ -128,33 +128,32 @@ int main(int argc, char* argv[]) {
     const auto executable = bp::search_path(other.at(0));
     const std::vector<std::string> exe_args(other.begin() + 1, other.end());
 
-    bp::ipstream out_stream;
-    bp::ipstream err_stream;
-
     if (!grcpp_options.confname.empty() && grcpp_options.color == "on") { //TODO: check if evaluation is really needed.
+        bp::ipstream out_stream;
+        bp::ipstream err_stream;
+
         bp::child child_process(bp::exe = executable, bp::args = exe_args, bp::std_out > out_stream, bp::std_err > err_stream);
-
         std::vector<std::thread> colorize_threads;
-
         if (grcpp_options.out) {
-            colorize_threads.emplace_back(colorize, std::ref(out_stream), std::ref(std::cout));
+            colorize_threads.emplace_back(
+                colorize, std::ref(out_stream), std::ref(std::cout), grcpp_options.confname
+            );
         }
         if (grcpp_options.err) {
-            colorize_threads.emplace_back(colorize, std::ref(err_stream), std::ref(std::cerr));
+            colorize_threads.emplace_back(
+                colorize, std::ref(err_stream), std::ref(std::cerr), grcpp_options.confname
+            );
         }
-
         for (auto& t : colorize_threads) {
             t.join();
         }
-
         child_process.wait();
 
         return child_process.exit_code();
     } else {
-        bp::child child_process(bp::exe = executable, bp::args = exe_args, bp::std_out > out_stream, bp::std_err > err_stream);
+        bp::child child_process(bp::exe = executable, bp::args = exe_args);
 
         child_process.wait();
-
         return child_process.exit_code();
     }
 
