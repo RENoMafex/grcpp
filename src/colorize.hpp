@@ -10,6 +10,6 @@
 #include "colors.hpp"
 
 //colorize given stream
-void colorize(boost::process::ipstream& stream, std::ostream& out/* , typename config */);
+void colorize(boost::process::ipstream& stream, std::ostream& out, std::string confname);
 
 #endif
