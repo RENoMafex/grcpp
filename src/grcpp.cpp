@@ -223,14 +223,18 @@ void init_program_options(int argc, char* argv[], Grcpp_Options &grcpp_options, 
 
 bool invalid_color_arg(Grcpp_Options& check) {
     using std::cout, std::endl;
+    const bool istty = isatty(STDOUT_FILENO);
     if (check.color == "auto") {
-        check.color = (isatty(STDOUT_FILENO)) ? "on" : "off";
+        check.color = (istty) ? "on" : "off";
         return false;
     }
     if (check.color == "on") return false;
     if (check.color == "off") return false;
-
-    cout << "\nERROR: invalid argument for option '--color'\n" << endl;
+    if (istty) {
+        cout << "\n\033[31m\033[1mERROR:\033[0m invalid argument for option '--color'\n" << endl;
+    } else {
+        cout << "\nERROR: invalid argument for option '--color'\n" << endl;
+    }
 
     return true;
 }
