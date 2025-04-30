@@ -49,11 +49,10 @@ void colorize(boost::process::ipstream& input, std::ostream& output, std::string
     bool is_last = false;
     std::string conf_line;
 
-    while (!is_last) {
-        while (std::getline(file_conffile, conf_line)) {
-            
-            if (conf_line.empty() || conf_line.at(0) == '#' || conf_line.at(0) == '\n') continue; // comments and empty lines
-        }
+    while (std::getline(file_conffile, conf_line)) {
+        strip_outer_spaces(conf_line);
+        if (conf_line.empty() || conf_line.at(0) == '#' || conf_line.at(0) == '\n') continue; // comments and empty lines
+        
     }
 
     std::string stdout_line = {};
