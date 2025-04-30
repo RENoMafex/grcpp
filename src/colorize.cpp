@@ -44,18 +44,27 @@ void colorize(boost::process::ipstream& input, std::ostream& output, std::string
         return;
     }
 
-    const std::ifstream file_conffile(conffile);
+    std::ifstream file_conffile(conffile);
     std::vector<std::string> expression_list = {};
-    bool islast = false;
-    std::string line;
-    while (std::getline(input, line)) {
-        //TODO: Make the lines accessible.
-        output << line << "\n";
+    bool is_last = false;
+    std::string conf_line;
+
+    while (!is_last) {
+        while (std::getline(file_conffile, conf_line)) {
+            
+            if (conf_line.empty() || conf_line.at(0) == '#' || conf_line.at(0) == '\n') continue; // comments and empty lines
+        }
+    }
+
+    std::string stdout_line = {};
+    while (std::getline(input, stdout_line)) {
+        //TODO: process input and write to output
+        output << stdout_line << "\n";
     }
 }
 
 void colorize_utilities::tolower(std::string& str) {
-    for (auto c : str) {
+    for (auto c : str) { // Ensures defined tolower behavior
         c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
     }
 }
@@ -63,8 +72,22 @@ void colorize_utilities::tolower(std::string& str) {
 std::string colorize_utilities::tolower(std::string_view str) {
     std::string output = {};
     output.reserve(str.size());
-    for (const auto c : str) {
+    for (const auto c : str) { // Ensures defined tolower behavior
         output.push_back(static_cast<char>(std::tolower(static_cast<unsigned char>(c))));
     }
     return output;
+}
+
+void colorize_utilities::strip_outer_spaces(std::string& str) {
+    size_t start = 0;
+    while (start < str.size() && std::isspace(str[start])) {
+        ++start;
+    }
+
+    size_t end = str.size();
+    while (end > start && std::isspace(str[end - 1])) {
+        --end;
+    }
+
+    str = str.substr(start, end - start);
 }

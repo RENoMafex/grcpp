@@ -69,8 +69,6 @@ void print_help_msg(std::string_view called_name = "grcpp");
 void init_program_options(int argc, char* argv[], Grcpp_Options &grcpp_options, std::vector<std::string> &other_options);
 //checks if an invalid option for the '--color' option is set
 bool invalid_color_arg(Grcpp_Options& check);
-//strip spaces (front and back only) from a string
-void strip_outer_spaces(std::string& str);
 #pragma endregion
 
 #pragma region int main()
@@ -108,7 +106,7 @@ int main(int argc, char* argv[]) {
             if (file) {
                 std::string line = {};
                 while (std::getline(file, line)) {
-                    strip_outer_spaces(line);
+                    colorize_utilities::strip_outer_spaces(line);
                     if (line.empty() || line.at(0) == '#' || line.at(0) == '\n') continue; // comments and empty lines
                     boost::regex pattern(line);
                     if (boost::regex_search(other.at(0), pattern, boost::regex_constants::match_perl)) {
@@ -237,20 +235,6 @@ bool invalid_color_arg(Grcpp_Options& check) {
     }
 
     return true;
-}
-
-void strip_outer_spaces(std::string& str) {
-    size_t start = 0;
-    while (start < str.size() && std::isspace(str[start])) {
-        ++start;
-    }
-
-    size_t end = str.size();
-    while (end > start && std::isspace(str[end - 1])) {
-        --end;
-    }
-
-    str = str.substr(start, end - start);
 }
 
 #pragma endregion
