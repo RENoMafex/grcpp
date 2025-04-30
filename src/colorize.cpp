@@ -46,13 +46,21 @@ void colorize(boost::process::ipstream& input, std::ostream& output, std::string
 
     std::ifstream file_conffile(conffile);
     std::vector<std::string> expression_list = {};
-    bool is_last = false;
-    std::string conf_line;
+    std::string conf_line = {};
+    std::unordered_map<std::string, std::string> mymap = {{"count", "more"}}; //TODO: rename this var
 
     while (std::getline(file_conffile, conf_line)) {
         strip_outer_spaces(conf_line);
         if (conf_line.empty() || conf_line.at(0) == '#' || conf_line.at(0) == '\n') continue; // comments and empty lines
-        
+        std::array<std::string, 2> fields = {conf_line.substr(0, conf_line.find("=")), conf_line.substr(conf_line.find("=") + 1)};
+        auto keyword = tolower(std::as_const(fields.at(0)));
+        auto value = fields.at(1);
+        #define KW keyword
+        if (KW=="color"||KW=="colour"||KW=="colors"||KW=="colours") KW = "color";
+        if (!(KW=="regexp"||KW=="color"||KW=="count"||KW=="command"||KW=="skip"||KW=="replace"||KW=="concat")) continue;
+        #undef KW
+        mymap.insert({keyword, value});
+        //Done until line 179 of grcat
     }
 
     std::string stdout_line = {};
@@ -63,7 +71,7 @@ void colorize(boost::process::ipstream& input, std::ostream& output, std::string
 }
 
 void colorize_utilities::tolower(std::string& str) {
-    for (auto c : str) { // Ensures defined tolower behavior
+    for (auto& c : str) { // Ensures defined tolower behavior
         c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
     }
 }

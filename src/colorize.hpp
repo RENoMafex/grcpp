@@ -6,6 +6,7 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <unordered_map>
 #include <boost/regex.hpp>
 #include <boost/process.hpp>
 #include "colors.hpp"
