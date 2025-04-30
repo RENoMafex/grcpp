@@ -30,7 +30,6 @@
 // - Rewrite grc
 
 
-
 #define BOOST_PROCESS_USE_STD_FS // No need for boost.filesystem
 
 #pragma region includes

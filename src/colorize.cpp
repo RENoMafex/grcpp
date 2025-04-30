@@ -55,10 +55,11 @@ void colorize(boost::process::ipstream& input, std::ostream& output, std::string
         std::array<std::string, 2> fields = {conf_line.substr(0, conf_line.find("=")), conf_line.substr(conf_line.find("=") + 1)};
         auto keyword = tolower(std::as_const(fields.at(0)));
         auto value = fields.at(1);
-        #define KW keyword
-        if (KW=="color"||KW=="colour"||KW=="colors"||KW=="colours") KW = "color";
-        if (!(KW=="regexp"||KW=="color"||KW=="count"||KW=="command"||KW=="skip"||KW=="replace"||KW=="concat")) continue;
-        #undef KW
+        {
+            auto& KW = keyword;
+            if (KW=="color"||KW=="colour"||KW=="colors"||KW=="colours") KW = "color";
+            if (!(KW=="regexp"||KW=="color"||KW=="count"||KW=="command"||KW=="skip"||KW=="replace"||KW=="concat")) continue;
+        }
         mymap.insert({keyword, value});
         //Done until line 179 of grcat
     }
