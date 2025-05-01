@@ -39,12 +39,6 @@ TEST_CASE("grcpp specific functions"){
         std::vector<std::string> other;
         init_program_options(argc, argv, o, other);
 
-        DLOG("GO!");
-        for(size_t i = 0; i<other.size(); i++) {
-            std::cout << i << ": " << other.at(i);
-        }
-        DLOG("DONE!");
-
         CHECK_FALSE(o.help);
         CHECK(o.err);
         CHECK(o.out);
