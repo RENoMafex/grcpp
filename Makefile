@@ -6,10 +6,11 @@ LDFLAGS = -lboost_program_options -lboost_regex
 
 # Directories
 SRC_DIR = src
+TEST_DIR := $(SRC_DIR)/tests
 BUILD_DIR = build
 
 # Define pseudotargets
-.PHONY: all run clean cleanall
+.PHONY: all run clean cleanall test
 
 # Source, Header and Object files
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
@@ -46,3 +47,8 @@ clean:
 # Clean out file and objects
 cleanall: clean
 	@rm -rfv $(TARGET)
+
+# Testing target
+test: $(TEST_DIR)/main_test.cpp
+	$(CXX) $(CXXFLAGS) -Iexternal/Catch2/src -o $(TEST_DIR)/test_runner $(TEST_DIR)/main_test.cpp
+	./$(TEST_DIR)/test_runner
