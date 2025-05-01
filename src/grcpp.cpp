@@ -29,37 +29,9 @@
 //DONE:
 // - Rewrite grc
 
-
-#define BOOST_PROCESS_USE_STD_FS // No need for boost.filesystem
-
-#pragma region includes
-#include <iostream>
-#include <filesystem>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <thread>
-#include <boost/regex.hpp>
-#include <boost/program_options.hpp>
-#include <boost/process.hpp>
-#include "colors.hpp"
-#include "colorize.hpp"
-// #include <cstdint> //maybe uncomment, if uintX_t, intX_t or something similar gets used
-#pragma endregion
-
-#define GRCPP_VERSION "v0.0.1(pre-alpha)"
-#define DLOG(x) std::cout<<x<<std::endl;
+#include "grcpp.hpp"
 
 namespace bp = boost::process;
-
-struct Grcpp_Options { //The options directly used by grcpp
-    bool help = false; //does print_help_message() need to be called?
-    bool err = false; //redirect stderr
-    bool out = false; //redirect stdout
-//  bool pty = false; //use pseutdoterminal
-    std::string confname = {}; //configfile name for grcat
-    std::string color = "auto"; //colorization of output (auto, on, off)
-};
 
 #pragma region function_declarations
 //prints help message

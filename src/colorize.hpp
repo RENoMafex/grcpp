@@ -1,15 +1,7 @@
 #ifndef COLORIZE_HPP
 #define COLORIZE_HPP
 
-#include <string>
-#include <cctype>
-#include <vector>
-#include <iostream>
-#include <fstream>
-#include <unordered_map>
-#include <boost/regex.hpp>
-#include <boost/process.hpp>
-#include "colors.hpp"
+#include "grcpp.hpp"
 
 //colorize given stream
 void colorize(boost::process::ipstream& stream, std::ostream& out, std::string confname);
