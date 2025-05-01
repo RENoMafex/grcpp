@@ -27,4 +27,11 @@ struct Grcpp_Options { //The options directly used by grcpp
     std::string color = "auto"; //colorization of output (auto, on, off)
 };
 
+//prints help message
+void print_help_msg(std::string_view called_name = "grcpp");
+//fills an 'Grcpp_Options' struct with the parsed arguments
+void init_program_options(int argc, char* argv[], Grcpp_Options &grcpp_options, std::vector<std::string> &other_options);
+//checks if an invalid option for the '--color' option is set
+bool invalid_color_arg(Grcpp_Options& check);
+
 #endif
