@@ -65,4 +65,11 @@ Special thanks to [Radovan Garabík](https://github.com/garabik) for creating th
 
 This project is licensed under the terms of the [GNU General Public License v3.0](http://www.gnu.org/licenses/gpl-3.0.html) or later.</br>
 The original **grc** project is licensed unter the [GNU General Public License v2.0](http://www.gnu.org/licenses/gpl-2.0.html) or later.</br>
-This project uses some of the Boost librarys, which are distributed under the [Boost Software License, Version 1.0](https://www.boost.org/LICENSE_1_0.txt).
+
+This project uses third party librarys, which are under different licenses. Details are in the directory `THIRD_PARTY_LICENSES/`.
+
+### Used librarys under different licenses
+
+- Catch2 -- [Boost Software License 1.0](https://www.boost.org/LICENSE_1_0.txt)
+- Boost librarys -- [Boost Software License 1.0](https://www.boost.org/LICENSE_1_0.txt)
+
