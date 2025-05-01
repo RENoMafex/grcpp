@@ -1,5 +1,5 @@
 #define CATCH_CONFIG_MAIN
-#include "catch.hpp"
+#include <catch2.x/catch.hpp>
 #include "../grcpp.hpp"
 
 TEST_CASE("to_escape() and color_map") {
