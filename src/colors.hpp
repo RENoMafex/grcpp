@@ -6,8 +6,12 @@
 #include <utility> // std::pair
 
 
+/// @brief Looks up escape code for given color name.
+/// @param color Name of the color, which should be looked up.
+/// @return ANSI-Escape sequence for given color.
 const std::string_view to_escape(std::string_view color);
 
+/// @brief Holds the pairs of colors.
 constexpr std::array<std::pair<std::string_view, std::string_view>, 46> color_map = {{
 
 // Formatting
