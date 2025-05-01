@@ -4,23 +4,53 @@
 
 TEST_CASE("to_escape() and color_map") {
     //std::string_view to_escape()
-    REQUIRE(to_escape("bold") == "\033[1m");
-    REQUIRE(to_escape("red") == "\033[31m");
-    REQUIRE(to_escape("anything") == "\033[0m");
-    REQUIRE(to_escape("yellow") == "\033[33m");
+    CHECK(to_escape("bold") == "\033[1m");
+    CHECK(to_escape("red") == "\033[31m");
+    CHECK(to_escape("anything") == "\033[0m");
+    CHECK(to_escape("yellow") == "\033[33m");
 }
 
 TEST_CASE("colorize_utilities"){
     // std::string tolower()
-    REQUIRE(colorize_utilities::tolower("HELLO WORLD") == "hello world");
+    CHECK(colorize_utilities::tolower("HELLO WORLD") == "hello world");
 
     // void tolower()
     std::string str = "HELLO WORLD!";
     colorize_utilities::tolower(str);
-    REQUIRE(str == "hello world!");
+    CHECK(str == "hello world!");
 
     // void strip_outer_spaces()
     str = "   hello world    ";
     colorize_utilities::strip_outer_spaces(str);
-    REQUIRE(str == "hello world");
+    CHECK(str == "hello world");
+}
+
+TEST_CASE("grcpp specific functions"){
+    SECTION("invalid_color_arg"){
+        Grcpp_Options my_opts;
+        CHECK_FALSE(invalid_color_arg(my_opts));
+        my_opts.color = "funny";
+        CHECK(invalid_color_arg(my_opts));
+    }
+    SECTION("init_program_options"){
+        char *argv[] = {"grcpp", "-s", "-e", "lsblk", "-p"};
+        int argc = 5;
+        Grcpp_Options o;
+        std::vector<std::string> other;
+        init_program_options(argc, argv, o, other);
+
+        DLOG("GO!");
+        for(size_t i = 0; i<other.size(); i++) {
+            std::cout << i << ": " << other.at(i);
+        }
+        DLOG("DONE!");
+
+        CHECK_FALSE(o.help);
+        CHECK(o.err);
+        CHECK(o.out);
+        CHECK(o.color == "auto");
+        // CHECK(o.confname == "conf.lsblk"); //gets set in main, not in init_program_options.
+        CHECK(other.at(0) == "lsblk");
+        CHECK(other.at(1) == "-p");
+    }
 }
