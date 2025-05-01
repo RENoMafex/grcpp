@@ -4,10 +4,10 @@
 
 TEST_CASE("to_escape() and color_map") {
     //std::string_view to_escape()
-    CHECK(to_escape("bold") == "\033[1m");
-    CHECK(to_escape("red") == "\033[31m");
-    CHECK(to_escape("anything") == "\033[0m");
-    CHECK(to_escape("yellow") == "\033[33m");
+    CHECK(static_cast<std::string>(to_escape("bold")) + "this" == "\033[1mthis");
+    CHECK(static_cast<std::string>(to_escape("red")) + "is" == "\033[31mis");
+    CHECK(static_cast<std::string>(to_escape("anything")) + "a" == "\033[0ma");
+    CHECK(static_cast<std::string>(to_escape("yellow")) + "Test!" == "\033[33mTest!");
 }
 
 TEST_CASE("colorize_utilities"){
