@@ -1,3 +1,6 @@
+#ifndef GRCPP_HPP
+#define GRCPP_HPP
+
 #define BOOST_PROCESS_USE_STD_FS // No need for boost.filesystem
 
 #include <iostream>
@@ -23,3 +26,5 @@ struct Grcpp_Options { //The options directly used by grcpp
     std::string confname = {}; //configfile name for grcat
     std::string color = "auto"; //colorization of output (auto, on, off)
 };
+
+#endif

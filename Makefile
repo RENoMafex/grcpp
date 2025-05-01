@@ -6,7 +6,6 @@ LDFLAGS = -lboost_program_options -lboost_regex
 
 # Directories
 SRC_DIR = src
-TEST_DIR := $(SRC_DIR)/tests
 BUILD_DIR = build
 
 # Define pseudotargets
@@ -16,9 +15,14 @@ BUILD_DIR = build
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
 HDRS = $(wildcard $(SRC_DIR)/*.hpp)
 OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRCS))
+TEST_OBJS = $(filter-out $(BUILD_DIR)/main.o, $(OBJS))
+
+TEST_FILE = $(SRC_DIR)/tests/test_main.cpp
 
 # Output
 TARGET = grcpp
+TEST_OBJ = $(BUILD_DIR)/test_runner.o
+TEST_TARGET = $(SRC_DIR)/tests/test_runner
 
 # Defaulttarget
 all: $(TARGET)
@@ -40,15 +44,24 @@ run:
 	@if [ ! -f $(TARGET) ]; then $(MAKE) $(TARGET); fi
 	@./$(TARGET)
 
-# Clean Object files
+# Clean Object files and the test runner
 clean:
 	@rm -rfv $(BUILD_DIR)
+	@rm -fv $(TEST_TARGET)
 
 # Clean out file and objects
 cleanall: clean
 	@rm -rfv $(TARGET)
 
+# Compile test file
+$(TEST_OBJ): $(TEST_FILE) $(OBJS) | $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $(TEST_OBJ)
+
+# Link test runner
+$(TEST_TARGET): $(TEST_OBJ) $(TEST_OBJS)
+	$(CXX) $^ -o $@ $(LDFLAGS)
+
 # Testing target
-test: $(TEST_DIR)/main_test.cpp
-	$(CXX) $(CXXFLAGS) -Iexternal/Catch2/src -o $(TEST_DIR)/test_runner $(TEST_DIR)/main_test.cpp
-	./$(TEST_DIR)/test_runner
+test: $(TEST_TARGET)
+	@echo
+	$(TEST_TARGET) --use-colour=yes
