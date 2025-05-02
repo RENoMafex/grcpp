@@ -29,6 +29,24 @@ TEST_CASE("colorize_utilities"){
     std::vector<std::string> vec = split(str, " ");
     CHECK(vec.at(0) == "hello");
     CHECK(vec.at(1) == "world");
+
+    vec = {};
+    vec = split("hello,this,is,a,test", ",");
+    CHECK(vec.at(0) == "hello");
+    CHECK(vec.at(1) == "this");
+    CHECK(vec.at(2) == "is");
+    CHECK(vec.at(3) == "a");
+    CHECK(vec.at(4) == "test");
+    CHECK_THROWS(vec.at(5) == "something");
+
+    vec = {};
+    vec = split("hello,this,is,a,test", ',');
+    CHECK(vec.at(0) == "hello");
+    CHECK(vec.at(1) == "this");
+    CHECK(vec.at(2) == "is");
+    CHECK(vec.at(3) == "a");
+    CHECK(vec.at(4) == "test");
+    CHECK_THROWS(vec.at(5) == "something");
 }
 
 TEST_CASE("grcpp specific functions"){
