@@ -71,7 +71,17 @@ void colorize(boost::process::ipstream& input, std::ostream& output, std::string
 }
 
 std::vector<std::string> colorize_utilities::split(std::string str, std::string separator){
-    return {str, separator};
+    std::vector<std::string> result = {};
+    while (str.find(separator) != std::string::npos) {
+        result.emplace_back(str.substr(0, str.find(separator)));
+        str = str.substr(str.find(separator) + 1);
+    }
+    result.emplace_back(str);
+    return result;
+}
+
+std::vector<std::string> colorize_utilities::split(std::string str, char separator) {
+    return split(str, std::string(1, separator));
 }
 
 void colorize_utilities::tolower(std::string& str) {
