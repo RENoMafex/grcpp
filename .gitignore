@@ -1,10 +1,14 @@
+# Build dir
 build/
-grcpp
-.vscode/
-.github/images/.$flowchart.drawio.bkp
-src/tests/test_runner
-src/*.gch
 
-#the build dir just has build artifacts
-#the executable also doesn't need to go to git
-#the .vscode folder also isn't included for obvious reasons
+# vscode settings folder
+.vscode/
+
+# some backup file of drawio
+.github/images/.$flowchart.drawio.bkp
+
+# (Pre-)compiled things
+grcpp
+src/*.gch
+src/tests/*.gch
+src/tests/test_runner

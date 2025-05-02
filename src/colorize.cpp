@@ -61,14 +61,17 @@ void colorize(boost::process::ipstream& input, std::ostream& output, std::string
             if (!(KW=="regexp"||KW=="color"||KW=="count"||KW=="command"||KW=="skip"||KW=="replace"||KW=="concat")) continue;
         }
         mymap.insert({keyword, value});
-        //Done until line 179 of grcat
-    }
+    } //while
 
     std::string stdout_line = {};
     while (std::getline(input, stdout_line)) {
         //TODO: process input and write to output
         output << stdout_line << "\n";
     }
+}
+
+std::vector<std::string> colorize_utilities::split(std::string str, std::string separator){
+    return {str, separator};
 }
 
 void colorize_utilities::tolower(std::string& str) {

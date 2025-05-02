@@ -9,6 +9,8 @@ void colorize(boost::process::ipstream& stream, std::ostream& out, std::string c
 //some utility functions for colorize
 namespace colorize_utilities{
 
+    std::vector<std::string> split(std::string str, std::string separator);
+
     //make string lowercase.
     void tolower(std::string& str);
 
