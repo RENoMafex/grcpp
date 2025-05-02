@@ -44,6 +44,18 @@ $(TARGET): $(CHDRS) $(OBJS)
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
+# Compile test file
+$(TEST_OBJ): $(TEST_FILE) $(OBJS) | $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $(TEST_OBJ)
+
+# Link test runner
+$(TEST_TARGET): $(TEST_OBJ) $(TEST_OBJS)
+	$(CXX) $^ -o $@ $(LDFLAGS)
+
+# Precompile Catch
+$(SRC_DIR)/tests/%.hpp.gch: $(SRC_DIR)/tests/%.hpp
+	$(CXX) $(CXXFLAGS) -x c++-header $< -o $@
+
 # Run-Target
 run:
 	@if [ ! -f $(TARGET) ]; then $(MAKE) $(TARGET); fi
@@ -58,15 +70,7 @@ clean:
 cleanall: clean
 	@rm -rfv $(TARGET)
 
-# Compile test file
-$(TEST_OBJ): $(TEST_FILE) $(OBJS) | $(BUILD_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $(TEST_OBJ)
-
-# Link test runner
-$(TEST_TARGET): $(TEST_OBJ) $(TEST_OBJS)
-	$(CXX) $^ -o $@ $(LDFLAGS)
-
 # Testing target
-test: $(TEST_TARGET)
+test: $(SRC_DIR)/tests/test_main.hpp.gch $(CHDRS) $(TEST_TARGET)
 	@echo
 	$(TEST_TARGET) --use-colour=yes
