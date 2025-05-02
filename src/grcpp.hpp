@@ -18,15 +18,15 @@
 #define GRCPP_VERSION "v0.0.1(pre-alpha)"
 #define DLOG(x) std::cout<<x<<std::endl;
 
-///\struct Grcpp_Options
-///\brief The options directly used by grcpp.
+/// @struct Grcpp_Options
+/// @brief The options directly used by grcpp.
 ///
 /// This struct holds the options, which determine, what grcpp should do.
-///\param help Boolean, determines, if the help needs to get displayed.
-///\param err Boolean, determines, if stderr should be colorized.
-///\param out Boolean, determines, if stdout should be colorized.
-///\param confname String, configfile name for colourize().
-///\param color String, colorization of output (auto, on, off)
+/// @param help Boolean, determines, if the help needs to get displayed.
+/// @param err Boolean, determines, if stderr should be colorized.
+/// @param out Boolean, determines, if stdout should be colorized.
+/// @param confname String, configfile name for colourize().
+/// @param color String, colorization of output (auto, on, off)
 struct Grcpp_Options {
     bool help = false;
     bool err = false;
