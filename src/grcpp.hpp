@@ -50,6 +50,6 @@ void init_program_options(int argc, char* argv[], Grcpp_Options &grcpp_options, 
 /// @brief Checks if the check.color argument is valid.
 /// @param check The struct, in which the color argument should be checked.
 /// @return true, when invalid. false, when valid.
-bool invalid_color_arg(Grcpp_Options& check);
+auto invalid_color_arg(Grcpp_Options& check) -> bool;
 
 #endif
