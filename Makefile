@@ -14,6 +14,7 @@ BUILD_DIR = build
 # Source, Header and Object files
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
 HDRS = $(wildcard $(SRC_DIR)/*.hpp)
+CHDRS = $(patsubst $(SRC_DIR)/%.hpp, $(SRC_DIR)/%.hpp.gch, $(HDRS))
 OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRCS))
 TEST_OBJS = $(filter-out $(BUILD_DIR)/main.o, $(OBJS))
 
@@ -31,9 +32,13 @@ all: $(TARGET)
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(HDRS) | $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
+# Precompile headers
+$(SRC_DIR)/%.hpp.gch: $(SRC_DIR)/%.hpp | $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -x c++-header $< -o $@
+
 # Link
-$(TARGET): $(OBJS)
-	$(CXX) $^ -o $@ $(LDFLAGS)
+$(TARGET): $(CHDRS) $(OBJS)
+	$(CXX) $(OBJS) -o $@ $(LDFLAGS)
 
 # Make the build directory if needed
 $(BUILD_DIR):

@@ -3,6 +3,7 @@ grcpp
 .vscode/
 .github/images/.$flowchart.drawio.bkp
 src/tests/test_runner
+src/*.gch
 
 #the build dir just has build artifacts
 #the executable also doesn't need to go to git
