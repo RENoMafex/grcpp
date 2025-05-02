@@ -12,6 +12,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+      with:
+        submodules: recurse
 
     - name: Set up Make
       run: sudo apt-get update && sudo apt-get install -y make g++ libboost-all-dev
