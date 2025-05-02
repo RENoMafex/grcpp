@@ -20,6 +20,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #### This repository is a C++ rewrite of the tool [**grc**](https://github.com/garabik/grc) by Radovan Garabik.
 
+[![Run Tests](https://github.com/RENoMafex/grcpp/actions/workflows/test.yml/badge.svg)](https://github.com/RENoMafex/grcpp/actions/workflows/test.yml)
+
 >[!WARNING]
 >This software is NOT in a working state and should not be used. Please only use this code for educational or development purposes!
 
