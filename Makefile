@@ -65,6 +65,7 @@ run:
 clean:
 	@rm -rfv $(BUILD_DIR)
 	@rm -fv $(TEST_TARGET)
+	@rm -fv $(CHDRS)
 
 # Clean out file and objects
 cleanall: clean
