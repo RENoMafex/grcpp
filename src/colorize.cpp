@@ -73,12 +73,19 @@ void colorize(boost::process::ipstream& input, std::ostream& output, std::string
         color_strings.emplace_back(c);
     }
 
+    std::string prev_color = to_escape("default");
+    std::string prev_count = "more";
+    bool blockflag = false;
+// grcat line 205
+
+
+
     std::string stdout_line = {};
     while (std::getline(input, stdout_line)) {
         //TODO: process input and write to output
         output << stdout_line << "\n";
     }
-}
+} // void colorize();
 
 std::vector<std::string> colorize_utilities::split(std::string str, std::string separator){
     std::vector<std::string> result = {};
