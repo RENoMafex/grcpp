@@ -47,7 +47,7 @@ void colorize(boost::process::ipstream& input, std::ostream& output, std::string
     std::ifstream file_conffile(conffile);
     std::vector<std::string> expression_list = {};
     std::string conf_line = {};
-    std::unordered_map<std::string, std::string> mymap = {{"count", "more"}}; //TODO: rename this var
+    std::unordered_map<std::string, std::string> my_map = {{"count", "more"}}; // named 'll' in grcat
 
     while (std::getline(file_conffile, conf_line)) {
         strip_outer_spaces(conf_line);
@@ -60,8 +60,18 @@ void colorize(boost::process::ipstream& input, std::ostream& output, std::string
             if (KW=="color"||KW=="colour"||KW=="colors"||KW=="colours") KW = "color";
             if (!(KW=="regexp"||KW=="color"||KW=="count"||KW=="command"||KW=="skip"||KW=="replace"||KW=="concat")) continue;
         }
-        mymap.insert({keyword, value});
+        my_map.insert({keyword, value});
     } //while
+
+    std::vector<std::string> color_strings = {}; // namend 'colstrings' in grcat
+    for (auto color_grp : split(my_map["color"], ",")) {
+        auto color_list = split(color_grp, " ");
+        std::string c = {};
+        for (auto i : color_list) {
+            c = c + to_escape(i);
+        }
+        color_strings.emplace_back(c);
+    }
 
     std::string stdout_line = {};
     while (std::getline(input, stdout_line)) {

@@ -2,14 +2,9 @@
 #define COLORS_HPP
 
 #include <array>
+#include <string>
 #include <string_view>
 #include <utility> // std::pair
-
-
-/// @brief Looks up escape code for given color name.
-/// @param color Name of the color, which should be looked up.
-/// @return ANSI-Escape sequence for given color.
-auto to_escape(std::string_view color) -> const std::string_view;
 
 /// @brief Holds the pairs of colors.
 constexpr std::array<std::pair<std::string_view, std::string_view>, 46> color_map = {{
@@ -75,10 +70,13 @@ constexpr std::array<std::pair<std::string_view, std::string_view>, 46> color_ma
     {"on_bright_white",     "\033[47;107m"}
 }};
 
-inline const std::string_view to_escape(std::string_view color) {
+/// @brief Looks up escape code for given color name.
+/// @param color Name of the color, which should be looked up.
+/// @return ANSI-Escape sequence for given color.
+inline auto to_escape(std::string_view color) -> const std::string {
     for (const auto& pair : color_map) {
         if (pair.first == color) {
-            return pair.second;
+            return std::string(pair.second);
         }
     }
     return "\033[0m"; // "default"
