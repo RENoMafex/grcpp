@@ -90,7 +90,7 @@ void colorize(boost::process::ipstream& input, std::ostream& output, std::string
             auto curr_count = pattern["count"];
             bool was_replace = false;
             while (true) {
-                m = pattern["regexp"]
+                auto m = pattern["regexp"];
             }
 
         }
