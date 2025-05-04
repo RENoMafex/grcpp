@@ -45,7 +45,6 @@ void colorize(boost::process::ipstream& input, std::ostream& output, std::string
     }
 
     std::ifstream file_conffile(conffile);
-    std::vector<std::string> expression_list = {};
     std::string conf_line = {};
     std::unordered_map<std::string, std::string> my_map = {{"count", "more"}}; // named 'll' in grcat
 
@@ -72,17 +71,30 @@ void colorize(boost::process::ipstream& input, std::ostream& output, std::string
         }
         color_strings.emplace_back(c);
     }
+    std::vector<decltype(my_map)> expression_list = {};
+    if (my_map.find("regexp") != my_map.end()) {
+        //TODO: Make my_map["regexp"] callable (grcat line 199)
+        expression_list.emplace_back(my_map);
+    }
 
     std::string prev_color = to_escape("default");
     std::string prev_count = "more";
+
     bool blockflag = false;
-// grcat line 205
-
-
-
     std::string stdout_line = {};
     while (std::getline(input, stdout_line)) {
-        //TODO: process input and write to output
+        std::vector<std::string> c_list = {};
+        bool skip = false;
+        for (auto pattern : expression_list) {
+            int pos = 0;
+            auto curr_count = pattern["count"];
+            bool was_replace = false;
+            while (true) {
+                m = pattern["regexp"]
+            }
+
+        }
+
         output << stdout_line << "\n";
     }
 } // void colorize();
