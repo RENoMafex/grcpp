@@ -47,6 +47,25 @@ TEST_CASE("colorize_utilities"){
     CHECK(vec.at(3) == "a");
     CHECK(vec.at(4) == "test");
     CHECK_THROWS(vec.at(5) == "something");
+
+    vec = {};
+    vec = split("hello,,this,is,a,test", ",");
+    CHECK(vec.at(0) == "hello");
+    CHECK(vec.at(1).empty());
+    CHECK(vec.at(2) == "this");
+    CHECK(vec.at(3) == "is");
+    CHECK(vec.at(4) == "a");
+    CHECK(vec.at(5) == "test");
+    CHECK_THROWS(vec.at(6));
+
+    vec = {};
+    vec = split(",hello,world!,", ",");
+    CHECK(vec.at(0).empty());
+    CHECK(vec.at(1) == "hello");
+    CHECK(vec.at(2) == "world!");
+    CHECK(vec.at(3).empty());
+    CHECK_THROWS(vec.at(6));
+
 }
 
 TEST_CASE("grcpp specific functions"){
