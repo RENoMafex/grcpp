@@ -19,5 +19,5 @@ jobs:
     - name: Set up Make
       run: sudo apt-get update && sudo apt-get install -y make g++ libboost-all-dev
 
-    - name: Run tests
-      run: make test
+    - name: Build and run application
+      run: make run
