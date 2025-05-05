@@ -80,19 +80,24 @@ void colorize(boost::process::ipstream& input, std::ostream& output, std::string
     std::string prev_color = to_escape("default");
     std::string prev_count = "more";
 
-    bool blockflag = false;
     std::string stdout_line = {};
     while (std::getline(input, stdout_line)) {
         std::vector<std::string> c_list = {};
-        bool skip = false;
+        bool skip = false,
+        blockflag = false;
         for (auto pattern : expression_list) {
             int pos = 0;
             auto curr_count = pattern["count"];
             bool was_replace = false;
             while (true) {
                 auto m = pattern["regexp"];
+                if (!m.empty()) {
+                    boost::regex line(m);
+                    if (pattern.find("replace") != pattern.end()) {
+                        if (was_replace) break;
+                    }
+                }
             }
-
         }
 
         output << stdout_line << "\n";
