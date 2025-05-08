@@ -3,6 +3,5 @@ Licensed under the GNU General Public License v3.0 or later.
 See COPYING file for more details.
 
 TODO:
-- redo the flowchart of how this works, its wrong now!
 - make colorize.cpp and 'void colorize()' MUCH more modular, as the way it is now, many objects (mostly variables) live WAY longer than needed right now
 - maybe add windows support, after it works reasonable under linux
