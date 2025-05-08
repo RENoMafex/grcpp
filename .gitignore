@@ -5,7 +5,7 @@ build/
 .vscode/
 
 # some backup file of drawio
-.github/images/.$flowchart.drawio.bkp
+.github/images/.$*.drawio.bkp
 
 # (Pre-)compiled things
 grcpp
