@@ -47,10 +47,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Grcpp aims to be faster than the original grc, that is why i decided to go for a single binary (opposed to grc wich uses another program called grcat to colorize the output) and utilize multithreading.
 
 ### 2.1 Details
-<h4> Visual representation of how grc works </h4>
+#### Visual representation of how grc works
 ![flowchart of how grcpp works](.github/images/flowchartgrc.svg)
 
-<h4> Conclusion </h4>
+#### Conclusion
 Now it should be pretty clear, that **grc** only is a wrapper for the underlying grcat (also part of the grc project) which can induce some performance overhead, so i decided to build this program into a single file, which simply utilizes threads to colorize the output(s).
 
 ### 2.2 Why?
