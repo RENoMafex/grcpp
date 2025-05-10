@@ -28,7 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 # Table of Contents
 + [1. About](#1-about)
 + [2. Changes](#2-changes)
-  + [2.1 Detils](#21-details)
+  + [2.1 Details](#21-details)
   + [2.2 Why](#22-why)
 + [3. How to Contribute](#3-how-to-contribute)
 + [4. Features](#4-features)
