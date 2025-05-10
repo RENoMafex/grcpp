@@ -25,6 +25,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 >[!WARNING]
 >This software is NOT in a working state and should not be used. Please only use this code for educational or development purposes!
 
+# Table of Contents
++ [1. About](#1-about)
++ [2. Changes](#2-changes)
+  + [2.1 Detils](#21-details)
+  + [2.2 Why](#22-why)
++ [3. How to Contribute](#3-how-to-contribute)
++ [4. Features](#4-features)
++ [5. Installation](#5-installation)
++ [6. Usage](#6-usage)
++ [7. Acknowledgements](#7-acknowledgments#)
++ [8. Licenses](#8-licenses)
+  + [8.1 Used librarys under different licenses](#81-used-librarys-under-different-licenses)
+
 ## 1. About
 
 [**grc** (Generic Colouriser)](https://github.com/garabik/grc) is a tool for adding color to command-line output. This project, **grcpp**, aims to provide a modern, efficient, and extensible implementation, while still being able to be a drop-in replacement of the original tool using C++.
