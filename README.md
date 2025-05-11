@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # grcpp
 
-##### This repository is a C++ rewrite of the tool [**grc**](https://github.com/garabik/grc) by Radovan Garabik.
+#### This repository is a C++ rewrite of the tool [**grc**](https://github.com/garabik/grc) by Radovan Garabik.
 
 [![Unit Tests](https://github.com/RENoMafex/grcpp/actions/workflows/unit_tests.yml/badge.svg)](https://github.com/RENoMafex/grcpp/actions/workflows/unit_tests.yml) [![System Tests](https://github.com/RENoMafex/grcpp/actions/workflows/system_tests.yml/badge.svg)](https://github.com/RENoMafex/grcpp/actions/workflows/system_tests.yml)
 
