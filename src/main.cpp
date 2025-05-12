@@ -22,7 +22,6 @@
 // - Implement line 106 (needs catch_signal() )
 // - Fix that if the called program takes one of the options,
 //   grcpp also takes, that it gets forwarded right. (is it even an issue?)
-// - See TODO in line 90
 // - Implement grcat (inside colorize() function)
 
 //DONE:
@@ -85,6 +84,7 @@ int main(int argc, char* argv[]) {
                 if (grcpp_options.confname.empty()) {
                     std::cout << argv[0] << ((grcpp_options.color == "on") ? " \033[31m\033[1mERROR:\033[0m" : " ERROR:") <<
                     " Configfile for command \"" << other.at(0) << "\" could not be determined!\n" << std::endl;
+                    return -1;
                 }
                 break;
             } // if (file)
@@ -94,7 +94,7 @@ int main(int argc, char* argv[]) {
     const auto executable = bp::search_path(other.at(0));
     const std::vector<std::string> exe_args(other.begin() + 1, other.end());
 
-    if (!grcpp_options.confname.empty() && grcpp_options.color == "on") { //TODO: check if evaluation is really needed.
+    if (grcpp_options.color == "on") {
         bp::ipstream out_stream;
         bp::ipstream err_stream;
 
