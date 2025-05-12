@@ -61,9 +61,15 @@ int main(int argc, char* argv[]) {
         if (xdg_conf_location.empty() && !home_location.empty()) {
             xdg_conf_location = home_location + "/.config";
         }
-        std::vector<std::string> conf_file_names = {"/etc/grc.conf", "/usr/local/etc/grc.conf"};
-        if (!xdg_conf_location.empty()) conf_file_names.emplace_back(xdg_conf_location + "/grc/grc.conf");
-        if (!home_location.empty()) conf_file_names.emplace_back(home_location + "/.grc/grc.conf");
+        std::vector<std::string> conf_file_names = {"/etc/grcpp.conf", "/usr/local/etc/grcpp.conf", "/etc/grc.conf", "/usr/local/etc/grc.conf"};
+        if (!xdg_conf_location.empty()) {
+            conf_file_names.emplace_back(xdg_conf_location + "/grc/grcpp.conf");
+            conf_file_names.emplace_back(xdg_conf_location + "/grc/grc.conf");
+        }
+        if (!home_location.empty()) {
+            conf_file_names.emplace_back(home_location + "/.grc/grcpp.conf");
+            conf_file_names.emplace_back(home_location + "/.grc/grc.conf");
+        }
         for (auto conf_file : conf_file_names) {
             std::ifstream file(conf_file); //file should be one of the "grc.conf"s
             if (file) {
