@@ -20,13 +20,13 @@ jobs:
         git config --global user.name "GitHub Action"
         git config --global user.email "github-actions@github.com"
 
-    # name: Update submodule
-    - run: cd colorfiles
-    - run: git fetch
-    - run: git pull
-    - run: cd ..
-    - run: git add colorfiles
-    - run: | # Check if there are changes to commit
+    - name: Update submodule
+      run: |
+        cd colorfiles
+        git fetch
+        git pull
+        cd ..
+        git add colorfiles
         if ! git diff --cached --quiet; then
           git commit -m "Update colorfiles submodule"
           git push
