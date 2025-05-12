@@ -1,4 +1,4 @@
-name: Update colorfiles
+name: Update Submodules
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
     - cron: '0 0 * * *' # minute hour day-of-month month day-of-week
 
 jobs:
-  update_colorfiles:
+  update_submodules:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +20,7 @@ jobs:
         git config --global user.name "GitHub Action"
         git config --global user.email "github-actions@github.com"
 
-    - name: Update submodule
+    - name: Update Colorfiles
       run: |
         cd colorfiles
         git fetch
