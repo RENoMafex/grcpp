@@ -5,7 +5,4 @@ See COPYING file for more details.
 TODO:
 - make colorize.cpp and 'void colorize()' MUCH more modular, as the way it is now, many objects (mostly variables) live WAY longer than needed right now
 - maybe add windows support, after it works reasonable under linux
-
-- add the needed configfiles (grc.conf or grcpp.conf)
 - add an install script for linux (and later windows)
-- add the colorfiles from grc
