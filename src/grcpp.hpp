@@ -44,7 +44,8 @@
 /// @param err Boolean, determines, if stderr should be colorized.
 /// @param out Boolean, determines, if stdout should be colorized.
 /// @param confname String, configfile name for colourize().
-/// @param color String, colorization of output (auto, on, off)
+/// @param color String, colorization of output (auto, on, off).
+/// @param getconf Boolean, determines, if the location of "grc.conf" should be output.
 struct Grcpp_Options {
     bool help = false;
     bool err = false;
@@ -52,6 +53,8 @@ struct Grcpp_Options {
 //  bool pty = false; //use pseutdoterminal
     std::string confname = {};
     std::string color = "auto";
+    //options from here on are not available in grc
+    bool getconf = false;
 };
 
 /// @brief Prints the help message.

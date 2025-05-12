@@ -30,9 +30,10 @@ void print_help_msg(std::string_view called_name) {
         "-c name --config=name    Use name as configuration file for grcat\n" <<
         "        --color=word     Word is one of: on, off, auto\n" <<
         "        --colour=word    Same as color, for compatibility reasons\n" <<
+        "        --getconf        check where the used \"grc.conf\" is located\n" <<
         "\n" <<
         "THIS SOFTWARE IS LICENSED UNDER THE GNU GENERAL PUBLIC LICENSE V3.0!\n" <<
-        "Copyright (c) Malte Schilling 2025" <<
+        "Copyright (c) Malte Schilling 2025\n" <<
     std::flush;
 }
 
@@ -47,7 +48,8 @@ void init_program_options(int argc, char* argv[], Grcpp_Options &grcpp_options, 
             ("stderr,e", "Redirect stderr.")
             ("stdout,s", "Redirect stdout.")
             ("config,c", value<string>(), "Config file name for grcat")
-            ("color,colour", value<string>(), "Set coloration to \"on\", \"off\" or \"auto\"");
+            ("color,colour", value<string>(), "Set coloration to \"on\", \"off\" or \"auto\"")
+            ("getconf", "check where grc.conf lives");
 
         parsed_options parsed = command_line_parser(argc, argv).
             options(grcpp_opts).
@@ -65,6 +67,7 @@ void init_program_options(int argc, char* argv[], Grcpp_Options &grcpp_options, 
         if (varmap.count("stdout")) grcpp_options.out = true;
         if (varmap.count("config")) grcpp_options.confname = varmap["config"].as<string>();
         if (varmap.count("color")) grcpp_options.color = varmap["color"].as<string>();
+        if (varmap.count("getconf")) grcpp_options.getconf = true;
     } catch (const boost::program_options::error &error) {
         std::cerr << "\n" << error.what() << "\n" << std::endl;
         print_help_msg(argv[0]);
