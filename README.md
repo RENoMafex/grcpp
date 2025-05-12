@@ -100,4 +100,5 @@ This project uses third party librarys, which are under different licenses. Deta
 
 - Catch2 -- [Boost Software License 1.0](https://www.boost.org/LICENSE_1_0.txt)
 - Boost librarys -- [Boost Software License 1.0](https://www.boost.org/LICENSE_1_0.txt)
+- Colorfiles -- [Unlicense](https://unlicense.org)
 

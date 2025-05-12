@@ -2,3 +2,6 @@
 	path = src/tests/catch2
 	url = https://github.com/catchorg/Catch2.git
 	branch = v2.x
+[submodule "colorfiles"]
+	path = colorfiles
+	url = https://github.com/renomafex/grcpp_colorfiles
