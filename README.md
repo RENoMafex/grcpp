@@ -67,7 +67,7 @@ My daily machine is a very old laptop where grc sometimes induces some noticable
 
 ### 3.1 Colorfiles
 
-If you want to contribute to the colorfiles, please open a pull request on [this repo](https://github.com/RENoMafex/grcpp_config_files)!
+If you want to contribute to the colorfiles, please open a pull request on [this repo](https://github.com/RENoMafex/grcpp_colorfiles)!
 
 ## 4. Features
 
