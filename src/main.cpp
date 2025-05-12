@@ -22,7 +22,6 @@
 // - Implement line 106 (needs catch_signal() )
 // - Fix that if the called program takes one of the options,
 //   grcpp also takes, that it gets forwarded right. (is it even an issue?)
-// - Add option -getconfig to display which grc.conf is used
 // - See TODO in line 90
 // - Implement grcat (inside colorize() function)
 
@@ -42,10 +41,15 @@ int main(int argc, char* argv[]) {
         std::cout << "\n" << error.what() << "\n" << std::endl;
         print_help_msg(argv[0]);
         return -1;
+    } catch (...) {
+        std::cerr << "\n" <<
+            "Unknown Error! Please create an issue on <https://github.com/RENoMafex/grcpp> or reach out to <schilling.malte@googlemail.com>." <<
+            "\n" <<
+        std::flush;
     }
 
     if (invalid_color_arg(grcpp_options)) {print_help_msg(argv[0]); return -1;}
-    if (grcpp_options.help || other.empty()) {print_help_msg(argv[0]); return 0;}
+    if (grcpp_options.help || (other.empty() && !grcpp_options.getconf)) {print_help_msg(argv[0]); return 0;}
     //TODO: Rewrite the next 3 lines.
     if (!grcpp_options.err) {grcpp_options.out = true;} //lines 67 - 73
     if (grcpp_options.err && !grcpp_options.out) {grcpp_options.err = true; grcpp_options.out = false;} //lines 67 - 73
@@ -64,6 +68,10 @@ int main(int argc, char* argv[]) {
         for (auto conf_file : conf_file_names) {
             std::ifstream file(conf_file); //file should be one of the "grc.conf"s
             if (file) {
+                if (grcpp_options.getconf) {
+                    std::cout << conf_file << std::endl;
+                    return 0;
+                }
                 std::string line = {};
                 while (std::getline(file, line)) {
                     colorize_utilities::strip_outer_spaces(line);
