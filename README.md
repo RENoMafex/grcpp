@@ -31,6 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   + [2.1 Details](#21-details)
   + [2.2 Why](#22-why)
 + [3. How to Contribute](#3-how-to-contribute)
+  + [3.1 Colorfiles](#31-colorfiles)
 + [4. Features](#4-features)
 + [5. Installation](#5-installation)
 + [6. Usage](#6-usage)
@@ -63,6 +64,10 @@ My daily machine is a very old laptop where grc sometimes induces some noticable
 - If you want to contribute code to this repo, just open a Pull Request through GitHub.
 >[!NOTE]
 >Proper instructions for contributing to grcpp will be added later.
+
+### 3.1 Colorfiles
+
+If you want to contribute to the colorfiles, please open a pull request on [this repo](https://github.com/RENoMafex/grcpp_config_files)!
 
 ## 4. Features
 
