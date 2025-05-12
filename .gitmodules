@@ -5,3 +5,4 @@
 [submodule "colorfiles"]
 	path = colorfiles
 	url = https://github.com/renomafex/grcpp_colorfiles
+	branch = main
