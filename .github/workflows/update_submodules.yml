@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         submodules: recursive
 
@@ -20,12 +20,16 @@ jobs:
         git config --global user.name "GitHub Action"
         git config --global user.email "github-actions@github.com"
 
-    - name: update submodules
-      run: |
-        cd colorfiles
-        git fetch
-        git pull
-        cd ..
-        git add .
-        git commit -m "Update colorfiles submodule [no ci]"
-        git push
+    # name: Update submodule
+    - run: cd colorfiles
+    - run: git fetch
+    - run: git pull
+    - run: cd ..
+    - run: git add colorfiles
+    - run: | # Check if there are changes to commit
+        if ! git diff --cached --quiet; then
+          git commit -m "Update colorfiles submodule"
+          git push
+        else
+          echo "No changes to commit."
+        fi
