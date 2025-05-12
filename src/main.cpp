@@ -51,9 +51,9 @@ int main(int argc, char* argv[]) {
     if (invalid_color_arg(grcpp_options)) {print_help_msg(argv[0]); return -1;}
     if (grcpp_options.help || (other.empty() && !grcpp_options.getconf)) {print_help_msg(argv[0]); return 0;}
     //TODO: Rewrite the next 3 lines.
-    if (!grcpp_options.err) {grcpp_options.out = true;} //lines 67 - 73
-    if (grcpp_options.err && !grcpp_options.out) {grcpp_options.err = true; grcpp_options.out = false;} //lines 67 - 73
-    if (grcpp_options.err && grcpp_options.out) {grcpp_options.err = true; grcpp_options.out = true;} //lines 67 - 73
+    if (!grcpp_options.err) {grcpp_options.out = true;} //grc lines 67 - 73
+    if (grcpp_options.err && !grcpp_options.out) {grcpp_options.err = true; grcpp_options.out = false;} //grc lines 67 - 73
+    if (grcpp_options.err && grcpp_options.out) {grcpp_options.err = true; grcpp_options.out = true;} //grc lines 67 - 73
     //from here on we know, that the grcpp_options is properly setup, other isnt empty and help isnt needed
     if (grcpp_options.confname.empty()) {
         //TODO: Make this not os dependant.
