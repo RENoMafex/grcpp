@@ -1,0 +1,31 @@
+name: Update colorfiles
+
+on:
+  workflow_dispatch:
+  schedule: # everyday at midnight
+    - cron: '0 0 * * *' # minute hour day-of-month month day-of-week
+
+jobs:
+  update_colorfiles:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    - name: Set up git
+      run: |
+        git config --global user.name "GitHub Action"
+        git config --global user.email "github-actions@github.com"
+
+    - name: update submodules
+      run: |
+        cd colorfiles
+        git fetch
+        git pull
+        cd ..
+        git add .
+        git commit -m "Update colorfiles submodule [no ci]"
+        git push
