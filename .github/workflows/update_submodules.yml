@@ -14,15 +14,22 @@ jobs:
       uses: actions/checkout@v4
       with:
         submodules: recursive
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Set up git
       run: |
         git config --global user.name "GitHub Action"
         git config --global user.email "github-actions@github.com"
 
-    - name: Update Submodules
+    - name: Update submodules to latest commit on their tracked branches
       run: |
-        git submodule update --remote --merge
+        git submodule foreach --recursive '
+          branch=$(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main)
+          echo "Updating $name to latest on $branch"
+          git fetch origin $branch
+          git checkout $branch
+          git pull origin $branch
+        '
         git add .
-        git commit -m "chore: Update submodules" || echo "No changes to commit"
+        git commit -m "chore: Update submodules to latest commits on their branches" || echo "No changes to commit"
         git push origin || echo "No changes to push"
