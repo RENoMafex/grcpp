@@ -77,6 +77,7 @@ If you want to contribute to the colorfiles, please open a pull request on [this
 ## 5. Installation
 
 A Makefile is included.
+Right now the Makefile only builds the program or the tests, but there is no install target or something like that right now.
 >[!NOTE]
 >Proper instructions for building and installing grcpp will be added soon.
 
