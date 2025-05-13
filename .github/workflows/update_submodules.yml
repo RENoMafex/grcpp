@@ -24,7 +24,7 @@ jobs:
       run: |
         cd colorfiles
         git fetch
-        git pull
+        git pull --ff-only
         cd ..
         git add colorfiles
         if ! git diff --cached --quiet; then
