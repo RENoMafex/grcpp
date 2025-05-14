@@ -23,13 +23,7 @@ jobs:
 
     - name: Update submodules to latest commit on their tracked branches
       run: |
-        git submodule foreach --recursive '
-          branch=$(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main)
-          echo "Updating $name to latest on $branch"
-          git fetch origin $branch
-          git checkout $branch
-          git pull origin $branch
-        '
+        git submodule update --remote --merge
         git add .
         git commit -m "chore: Update submodules to latest commits on their branches" || echo "No changes to commit"
         git push origin || echo "No changes to push"
