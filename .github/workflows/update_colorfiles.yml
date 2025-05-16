@@ -21,7 +21,7 @@ jobs:
     - name: Update colorfiles
       run: |
         rm -rf colorfiles
-        git clone --depth 1 git@github.com:RENoMafex/grcpp_colorfiles.git colorfiles
+        git clone --depth 1 https://github.com/RENoMafex/grcpp_colorfiles.git colorfiles
         rm -rf colorfiles/.git
         git add --all
         git commit -m "chore: Update colorfiles" || echo "No changes to commit"
