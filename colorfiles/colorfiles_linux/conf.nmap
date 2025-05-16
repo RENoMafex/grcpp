@@ -1,0 +1,59 @@
+# Starting Nmap
+regexp=Starting\s(Nmap)\s\d+\.\d+
+colours=blue, bold blue
+-
+# Scan Title
+regexp=Nmap\sscan\sreport\sfor\s(\S+)\s\(([^\)]+)\)
+colours=default,bold green, bold magenta
+-
+regexp=Nmap\sscan\sreport\sfor\s(\S+)$
+colours=default,bold magenta
+-
+# up
+regexp=Host\sis\s(up)
+colours=green, bold green
+-
+# Latency
+regexp=\((\S+)\slatency
+colours=yellow, bold yellow
+-
+# Failed to resolve
+regexp=Failed\sto\sresolve\s(\S+)\.
+colours=red, bold red
+-
+# Closed ports
+regexp=Not\sshown\:\s(\d+)\s(\S+)\s\S+\sports
+colours=red,bright_red bold,red bold
+-
+# Titles
+regexp=^PORT.*$|^HOP.*
+colours=bold
+-
+# Ports
+regexp=^(\d+)\/(\w+)\s+(\w+)\s+(\S+)
+colours=default,bold green,magenta,cyan,bold yellow
+-
+# Ports Details
+regexp=^\|_?(.*)
+colours=bold green,default
+-
+# Trace
+regexp=^\d+\s+(\d+\.\d+\sms)[^0-9]*(\d+\.\d+\.\d+\.\d+)
+colours=default,green,magenta
+-
+# Network Distance:
+regexp=Network Distance:\s(\d+)
+colours=default,bold green
+-
+# Rule for ALL IPs.
+regexp=\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}
+colours=bold magenta
+-
+# Rule for percentages (Crtl+x)
+regexp=\d{1,2}\.\d\d\%
+colours=bold yellow
+-
+# Rule for remaining time (Crtl+x)
+regexp=\((\d\:\d{2}\:\d{2}\sremaining)\)
+colours=default, bold yellow
+-
