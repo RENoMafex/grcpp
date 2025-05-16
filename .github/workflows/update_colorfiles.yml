@@ -5,6 +5,9 @@ on:
   schedule: # everyday at midnight
     - cron: '0 0 * * *' # minute hour day-of-month month day-of-week
 
+permissions:
+  contents: write # Required to push changes to the repository
+
 jobs:
   update_submodules:
     runs-on: ubuntu-latest
