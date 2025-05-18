@@ -16,10 +16,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    #- name: Set up git
-      #run: |
-      #  git config --global user.name "GitHub Action"
-      #  git config --global user.email "github-actions@github.com"
+    - name: Set up git
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
     - name: Update colorfiles
       run: |
