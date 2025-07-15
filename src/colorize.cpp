@@ -109,7 +109,7 @@ void colorize(boost::process::ipstream& input, std::ostream& output, std::string
             bool was_replace = false;
             while (true) {
                 auto m = pattern["regexp"];
-                if (!m.empty()) {
+                if (!m.empty()) { // grcat line 220
                     boost::regex line(m); // i dont think its right this way?
                     if (pattern.find("replace") != pattern.end()) {
                         if (was_replace) break;
