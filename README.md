@@ -99,7 +99,7 @@ This project uses third party librarys, which are under different licenses. Deta
 
 ### 8.1 Used librarys under different licenses
 
-- Catch2 -- [Boost Software License 1.0](https://www.boost.org/LICENSE_1_0.txt)
-- Boost librarys -- [Boost Software License 1.0](https://www.boost.org/LICENSE_1_0.txt)
+- Catch2 (3.13) -- [Boost Software License 1.0](https://www.boost.org/LICENSE_1_0.txt)
+- Boost libraries (1.83) -- [Boost Software License 1.0](https://www.boost.org/LICENSE_1_0.txt)
 - Colorfiles -- [Unlicense](https://unlicense.org)
 
