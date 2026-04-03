@@ -16,7 +16,7 @@
 
 # Compiler and Flags
 CXX ?= g++
-CXXFLAGS = $(WARNINGS) -std=c++17 -O0
+CXXFLAGS = $(WARNINGS) -std=c++17 -O0 -g
 WARNINGS = -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2
 LDFLAGS = -lboost_program_options -lboost_regex
 
