@@ -12,3 +12,6 @@ grcpp
 src/*.gch
 src/tests/*.gch
 src/tests/test_runner
+
+# boost
+src/boost
