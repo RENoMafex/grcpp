@@ -27,9 +27,16 @@
 #include <string>
 #include <vector>
 #include <thread>
-#include <boost/regex.hpp>
-#include <boost/program_options.hpp>
-#include <boost/process.hpp>
+
+// #include <boost/regex.hpp>
+// #include <boost/program_options.hpp>
+// #include <boost/process.hpp>
+
+#include "boost/include/boost/regex.hpp"
+#include "boost/include/boost/program_options.hpp"
+#include "boost/include/boost/process.hpp"
+
+
 #include "colors.hpp"
 #include "colorize.hpp"
 
