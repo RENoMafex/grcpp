@@ -14,4 +14,4 @@ src/tests/*.gch
 src/tests/test_runner
 
 # boost
-src/boost
+src/boost/**
