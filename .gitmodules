@@ -2,3 +2,7 @@
 	path = src/tests/catch2
 	url = https://github.com/catchorg/Catch2.git
 	branch = v2.x
+[submodule "src/boost"]
+	path = src/boost
+	url = https://github.com/boostorg/boost.git
+	branch = v1.83.0
